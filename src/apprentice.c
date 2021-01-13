@@ -27,7 +27,6 @@
 #include "constants/items.h"
 #include "constants/pokemon.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 #include "constants/trainers.h"
 #include "constants/moves.h"
 
@@ -923,7 +922,7 @@ static void PrintApprenticeMessage(void)
 static void Script_PrintApprenticeMessage(void)
 {
     ScriptContext2_Enable();
-    FreezeEventObjects();
+    FreezeObjectEvents();
     sub_808B864();
     sub_808BCF4();
     DrawDialogueFrame(0, 1);
@@ -1215,15 +1214,15 @@ static void SaveApprentice(void)
 static void SetSavedApprenticeTrainerGfxId(void)
 {
     u8 i;
-    u8 mapObjectGfxId;
+    u8 objectEventGfxId;
     u8 class = gApprentices[gSaveBlock2Ptr->apprentices[0].id].facilityClass;
 
     for (i = 0; i < ARRAY_COUNT(gTowerMaleFacilityClasses) && gTowerMaleFacilityClasses[i] != class; i++)
         ;
     if (i != ARRAY_COUNT(gTowerMaleFacilityClasses))
     {
-        mapObjectGfxId = gTowerMaleTrainerGfxIds[i];
-        VarSet(VAR_OBJ_GFX_ID_0, mapObjectGfxId);
+        objectEventGfxId = gTowerMaleTrainerGfxIds[i];
+        VarSet(VAR_OBJ_GFX_ID_0, objectEventGfxId);
         return;
     }
 
@@ -1231,23 +1230,23 @@ static void SetSavedApprenticeTrainerGfxId(void)
         ;
     if (i != ARRAY_COUNT(gTowerFemaleFacilityClasses))
     {
-        mapObjectGfxId = gTowerFemaleTrainerGfxIds[i];
-        VarSet(VAR_OBJ_GFX_ID_0, mapObjectGfxId);
+        objectEventGfxId = gTowerFemaleTrainerGfxIds[i];
+        VarSet(VAR_OBJ_GFX_ID_0, objectEventGfxId);
     }
 }
 
 static void SetPlayerApprenticeTrainerGfxId(void)
 {
     u8 i;
-    u8 mapObjectGfxId;
+    u8 objectEventGfxId;
     u8 class = gApprentices[PLAYER_APPRENTICE.id].facilityClass;
 
     for (i = 0; i < ARRAY_COUNT(gTowerMaleFacilityClasses) && gTowerMaleFacilityClasses[i] != class; i++)
         ;
     if (i != ARRAY_COUNT(gTowerMaleFacilityClasses))
     {
-        mapObjectGfxId = gTowerMaleTrainerGfxIds[i];
-        VarSet(VAR_OBJ_GFX_ID_0, mapObjectGfxId);
+        objectEventGfxId = gTowerMaleTrainerGfxIds[i];
+        VarSet(VAR_OBJ_GFX_ID_0, objectEventGfxId);
         return;
     }
 
@@ -1255,8 +1254,8 @@ static void SetPlayerApprenticeTrainerGfxId(void)
         ;
     if (i != ARRAY_COUNT(gTowerFemaleFacilityClasses))
     {
-        mapObjectGfxId = gTowerFemaleTrainerGfxIds[i];
-        VarSet(VAR_OBJ_GFX_ID_0, mapObjectGfxId);
+        objectEventGfxId = gTowerFemaleTrainerGfxIds[i];
+        VarSet(VAR_OBJ_GFX_ID_0, objectEventGfxId);
     }
 }
 
@@ -1297,13 +1296,13 @@ const u8 *GetApprenticeNameInLanguage(u32 apprenticeId, s32 language)
 // Functionally unused
 static void Task_SwitchToFollowupFuncAfterButtonPress(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
         SwitchTaskToFollowupFunc(taskId);
 }
 
 static void Task_ExecuteFuncAfterButtonPress(u8 taskId)
 {
-    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         gApprenticeFunc = (void*)(u32)(((u16)gTasks[taskId].data[0] | (gTasks[taskId].data[1] << 16)));
         gApprenticeFunc();

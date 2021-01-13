@@ -21,7 +21,6 @@
 #include "intro.h"
 #include "graphics.h"
 #include "sound.h"
-#include "constants/species.h"
 #include "util.h"
 #include "title_screen.h"
 #include "constants/rgb.h"
@@ -90,7 +89,7 @@
 
 extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
 extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
-extern const struct SpriteTemplate gUnknown_08596C10[];
+extern const struct SpriteTemplate gAncientPowerRockSpriteTemplate[];
 
 //ewram
 EWRAM_DATA u16 gIntroCharacterGender = 0;
@@ -1129,7 +1128,7 @@ static void Task_IntroFadeIn(u8 taskId)
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON);
     gTasks[taskId].func = Task_IntroWaterDrops;
     gIntroFrameCounter = 0;
-    m4aSongNumStart(MUS_DEMO1);
+    m4aSongNumStart(MUS_INTRO);
     ResetSerial();
 }
 
@@ -1563,7 +1562,7 @@ static void Task_IntroLoadPart3Graphics(u8 taskId)
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_1 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG2_ON | DISPCNT_OBJ_ON);
     gTasks[taskId].func = Task_IntroSpinAndZoomPokeball;
     gIntroFrameCounter = 0;
-    m4aSongNumStart(MUS_T_BATTLE);
+    m4aSongNumStart(MUS_INTRO_BATTLE);
 }
 
 static void Task_IntroSpinAndZoomPokeball(u8 taskId)
@@ -1782,7 +1781,7 @@ static void CreateGroudonRockSprites(u8 a0)
 
     for (i = 0; i < 6; i++)
     {
-        spriteId = CreateSprite(gUnknown_08596C10, gIntroGroudonRockData[i][0], 0xA0, i);
+        spriteId = CreateSprite(gAncientPowerRockSpriteTemplate, gIntroGroudonRockData[i][0], 0xA0, i);
         gSprites[spriteId].callback = SpriteCB_IntroGroudonRocks;
         gSprites[spriteId].oam.priority = 0;
         gSprites[spriteId].data[1] = i;
@@ -2355,7 +2354,7 @@ static void Task_IntroRayquazaGlowScene_1(u8 taskId)
             if (data[1] == 6)
             {
                 spriteId = CreateSprite(&gIntroRayquazaHyperbeamSprite, 120, 88, 15);
-                PlaySE(SE_OP_BASYU);
+                PlaySE(SE_INTRO_BLAST);
                 gSprites[spriteId].invisible = TRUE;
                 gSprites[spriteId].data[3] = data[4];
                 data[0]++;

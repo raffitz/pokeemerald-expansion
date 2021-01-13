@@ -3,7 +3,6 @@
 #include "constants/songs.h"
 #include "constants/easy_chat.h"
 #include "constants/event_objects.h"
-#include "constants/vars.h"
 #include "mauville_old_man.h"
 #include "event_data.h"
 #include "string_util.h"
@@ -137,7 +136,7 @@ void SetMauvilleOldMan(void)
             SetupGiddy();
             break;
     }
-    ScrSpecial_SetMauvilleOldManEventObjGfx();
+    ScrSpecial_SetMauvilleOldManObjEventGfx();
 }
 
 u8 GetCurrentMauvilleOldMan(void)
@@ -221,7 +220,7 @@ static void PrepareSongText(void)
         if (lineNum == 0)
         {
             *(wordEnd++) = EXT_CTRL_CODE_BEGIN;
-            *(wordEnd++) = 15;
+            *(wordEnd++) = EXT_CTRL_CODE_FILL_WINDOW;
         }
     }
 }
@@ -407,7 +406,7 @@ void ResetMauvilleOldManFlag(void)
         case MAUVILLE_MAN_GIDDY:
             break;
     }
-    ScrSpecial_SetMauvilleOldManEventObjGfx();
+    ScrSpecial_SetMauvilleOldManObjEventGfx();
 }
 
 
@@ -674,9 +673,9 @@ static void Task_BardSong(u8 taskId)
     RunTextPrintersAndIsPrinter0Active();
 }
 
-void ScrSpecial_SetMauvilleOldManEventObjGfx(void)
+void ScrSpecial_SetMauvilleOldManObjEventGfx(void)
 {
-    VarSet(VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_BARD);
+    VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_BARD);
 }
 
 // Language fixers?

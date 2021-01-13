@@ -1,3 +1,6 @@
+.set LOCALID_ATTENDANT_SINGLES, 1
+.set LOCALID_ATTENDANT_DOUBLES, 6
+
 BattleFrontier_BattlePalaceLobby_MapScripts:: @ 824D77E
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePalaceLobby_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePalaceLobby_OnWarp
@@ -9,7 +12,7 @@ BattleFrontier_BattlePalaceLobby_OnWarp: @ 824D789
 
 BattleFrontier_BattlePalaceLobby_EventScript_TurnPlayerNorth:: @ 824D793
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattlePalaceLobby_OnFrame: @ 824D79D
@@ -251,7 +254,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_WalkToDoor:: @ 824DBBC
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	call_if_eq BattleFrontier_BattlePalaceLobby_EventScript_TalkedToDoublesAttendant
 	applymovement VAR_LAST_TALKED, BattleFrontier_BattlePalaceLobby_Movement_WalkToDoor
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePalaceLobby_Movement_WalkToDoor
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePalaceLobby_Movement_WalkToDoor
 	waitmovement 0
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	call_if_eq BattleFrontier_BattlePalaceLobby_EventScript_OpenSinglesHallDoor
@@ -259,7 +262,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_WalkToDoor:: @ 824DBBC
 	call_if_eq BattleFrontier_BattlePalaceLobby_EventScript_OpenDoublesHallDoor
 	waitdooranim
 	applymovement VAR_LAST_TALKED, BattleFrontier_BattlePalaceLobby_Movement_AttendantEnterDoor
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePalaceLobby_Movement_PlayerEnterDoor
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePalaceLobby_Movement_PlayerEnterDoor
 	waitmovement 0
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	call_if_eq BattleFrontier_BattlePalaceLobby_EventScript_CloseSinglesHallDoor
@@ -269,11 +272,11 @@ BattleFrontier_BattlePalaceLobby_EventScript_WalkToDoor:: @ 824DBBC
 	return
 
 BattleFrontier_BattlePalaceLobby_EventScript_TalkedToSinglesAttendant:: @ 824DC23
-	setvar VAR_LAST_TALKED, 1
+	setvar VAR_LAST_TALKED, LOCALID_ATTENDANT_SINGLES
 	return
 
 BattleFrontier_BattlePalaceLobby_EventScript_TalkedToDoublesAttendant:: @ 824DC29
-	setvar VAR_LAST_TALKED, 6
+	setvar VAR_LAST_TALKED, LOCALID_ATTENDANT_DOUBLES
 	return
 
 BattleFrontier_BattlePalaceLobby_EventScript_OpenSinglesHallDoor:: @ 824DC2F

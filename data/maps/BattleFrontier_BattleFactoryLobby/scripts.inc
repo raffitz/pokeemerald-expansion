@@ -1,3 +1,6 @@
+.set LOCALID_ATTENDANT_SINGLES, 1
+.set LOCALID_ATTENDANT_DOUBLES, 6
+
 BattleFrontier_BattleFactoryLobby_MapScripts:: @ 82583E8
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleFactoryLobby_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleFactoryLobby_OnWarp
@@ -9,7 +12,7 @@ BattleFrontier_BattleFactoryLobby_OnWarp: @ 82583F3
 
 BattleFrontier_BattleFactoryLobby_EventScript_TurnPlayerNorth:: @ 82583FD
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattleFactoryLobby_OnFrame: @ 8258407
@@ -176,7 +179,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_EnterChallenge:: @ 825871A
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	call_if_eq BattleFrontier_BattleFactoryLobby_EventScript_TalkedToDoublesAttendant
 	applymovement VAR_LAST_TALKED, BattleFrontier_BattleFactoryLobby_Movement_AttendantEnterDoor
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleFactoryLobby_Movement_PlayerEnterDoor
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleFactoryLobby_Movement_PlayerEnterDoor
 	waitmovement 0
 	warp MAP_BATTLE_FRONTIER_BATTLE_FACTORY_PRE_BATTLE_ROOM, 255, 8, 13
 	setvar VAR_TEMP_0, 0
@@ -184,11 +187,11 @@ BattleFrontier_BattleFactoryLobby_EventScript_EnterChallenge:: @ 825871A
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_TalkedToSinglesAttendant:: @ 825875C
-	setvar VAR_LAST_TALKED, 1
+	setvar VAR_LAST_TALKED, LOCALID_ATTENDANT_SINGLES
 	return
 
 BattleFrontier_BattleFactoryLobby_EventScript_TalkedToDoublesAttendant:: @ 8258762
-	setvar VAR_LAST_TALKED, 6
+	setvar VAR_LAST_TALKED, LOCALID_ATTENDANT_DOUBLES
 	return
 
 BattleFrontier_BattleFactoryLobby_EventScript_ExplainChallenge:: @ 8258768

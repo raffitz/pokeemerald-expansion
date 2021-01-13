@@ -1,3 +1,5 @@
+.set LOCALID_ATTENDANT, 1
+
 BattleFrontier_BattleArenaCorridor_MapScripts:: @ 82573B9
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleArenaCorridor_OnFrame
 	.byte 0
@@ -9,15 +11,15 @@ BattleFrontier_BattleArenaCorridor_OnFrame: @ 82573BF
 BattleFrontier_BattleArenaCorridor_EventScript_WalkToBattleRoom:: @ 82573C9
 	delay 16
 	setvar VAR_TEMP_0, 1
-	applymovement 1, BattleFrontier_BattleArenaCorridor_Movement_AttendantWalkToDoor
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleArenaCorridor_Movement_PlayerWalkToDoor
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattleArenaCorridor_Movement_AttendantWalkToDoor
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleArenaCorridor_Movement_PlayerWalkToDoor
 	waitmovement 0
-	applymovement 1, BattleFrontier_BattleArenaCorridor_Movement_AttendantFacePlayer
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattleArenaCorridor_Movement_AttendantFacePlayer
 	waitmovement 0
 	msgbox BattleFrontier_BattleArenaCorridor_Text_PleaseStepIn, MSGBOX_SIGN
-	applymovement 1, BattleFrontier_BattleArenaCorridor_Movement_AttendantMoveOutOfWay
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattleArenaCorridor_Movement_AttendantMoveOutOfWay
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleArenaCorridor_Movement_PlayerEnterDoor
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleArenaCorridor_Movement_PlayerEnterDoor
 	waitmovement 0
 	setvar VAR_0x8006, 0
 	warp MAP_BATTLE_FRONTIER_BATTLE_ARENA_BATTLE_ROOM, 255, 7, 5

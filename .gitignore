@@ -5,6 +5,7 @@
 *.gba
 *.sgm
 *.sa1
+*.ss[0-9]
 *.sg1
 *.1bpp
 *.4bpp
@@ -32,3 +33,4 @@ porymap.project.cfg
 .vscode/
 *.a
 .fuse_hidden*
+*.sna

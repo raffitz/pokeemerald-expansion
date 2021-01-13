@@ -23,7 +23,7 @@ NewMauville_Entrance_OnTransition: @ 82372FB
 
 NewMauville_Entrance_EventScript_Door:: @ 82372FF
 	lockall
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox NewMauville_Entrance_Text_DoorIsLocked, MSGBOX_DEFAULT
 	checkitem ITEM_BASEMENT_KEY, 1
@@ -40,7 +40,7 @@ NewMauville_Entrance_EventScript_Door:: @ 82372FF
 	setmetatile 4, 1, METATILE_Facility_NewMauvilleDoor_Open_Tile4, 0
 	setmetatile 5, 1, METATILE_Facility_NewMauvilleDoor_Open_Tile5, 1
 	special DrawWholeMapView
-	playse SE_BAN
+	playse SE_BANG
 	setvar VAR_NEW_MAUVILLE_STATE, 1
 	releaseall
 	end

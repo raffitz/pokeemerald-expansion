@@ -13,6 +13,7 @@ EventScript_UnusedRet:: @ 828CCC6
 
 @ Gabby and Ty always move to the same spots for the first 5 battles
 @ From the 6th battle onwards, they move randomly between locations 6-8
+@ Note: The local IDs of Gabby and Ty are hard-coded in GabbyAndTySetScriptVarsToObjectEventLocalIds
 GabbyAndTy_EventScript_UpdateLocation:: @ 828CCC7
 	cleartrainerflag TRAINER_GABBY_AND_TY_6
 	specialvar VAR_RESULT, GabbyAndTyGetBattleNum
@@ -210,7 +211,7 @@ GabbyAndTy_EventScript_TyBattle6:: @ 828CF36
 
 GabbyAndTy_EventScript_FirstInterview:: @ 828CF56
 	special GabbyAndTyBeforeInterview
-	special GabbyAndTySetScriptVarsToEventObjectLocalIds
+	special GabbyAndTySetScriptVarsToObjectEventLocalIds
 	compare VAR_FACING, DIR_NORTH
 	call_if_eq GabbyAndTy_EventScript_FacePlayerNorth
 	compare VAR_FACING, DIR_SOUTH
@@ -241,7 +242,7 @@ GabbyAndTy_EventScript_FacePlayerEast:: @ 828CFB1
 
 GabbyAndTy_EventScript_RequestInterview:: @ 828CFC3
 	special GabbyAndTyBeforeInterview
-	special GabbyAndTySetScriptVarsToEventObjectLocalIds
+	special GabbyAndTySetScriptVarsToObjectEventLocalIds
 	compare VAR_FACING, DIR_NORTH
 	call_if_eq GabbyAndTy_EventScript_FacePlayerNorth
 	compare VAR_FACING, DIR_SOUTH

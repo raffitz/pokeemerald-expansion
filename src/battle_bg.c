@@ -691,6 +691,25 @@ static const struct BattleBackground gBattleTerrainTable[] =
     },
 };
 
+static void sub_8035648(void);
+
+// Unused
+static void sub_8035608(void)
+{
+    u8 spriteId;
+
+    ResetSpriteData();
+    spriteId = CreateSprite(&gUnknown_0831AC88, 0, 0, 0);
+    gSprites[spriteId].invisible = TRUE;
+    SetMainCallback2(sub_8035648);
+}
+
+static void sub_8035648(void)
+{
+    AnimateSprites();
+    BuildOamBuffer();
+}
+
 void BattleInitBgsAndWindows(void)
 {
     ResetBgsAndClearDma3BusyFlags(0);
@@ -1086,7 +1105,7 @@ void InitLinkBattleVsScreen(u8 taskId)
             if (gTasks[taskId].data[5] != 0)
                 DrawLinkBattleVsScreenOutcomeText();
 
-            PlaySE(SE_W231);
+            PlaySE(SE_M_HARDEN);
             DestroyTask(taskId);
             gSprites[gBattleStruct->linkBattleVsSpriteId_V].invisible = FALSE;
             gSprites[gBattleStruct->linkBattleVsSpriteId_S].invisible = FALSE;

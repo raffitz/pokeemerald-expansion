@@ -1,3 +1,5 @@
+.set LOCALID_FAMILIAR_GRUNT, 13
+
 SlateportCity_OceanicMuseum_1F_MapScripts:: @ 820AD95
 	.byte 0
 
@@ -7,14 +9,14 @@ SlateportCity_OceanicMuseum_1F_EventScript_EntranceAttendant:: @ 820AD96
 
 SlateportCity_OceanicMuseum_1F_EventScript_PayEntranceFeeLeft:: @ 820AD9F
 	lockall
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	goto SlateportCity_OceanicMuseum_1F_EventScript_PayEntranceFee
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_PayEntranceFeeRight:: @ 820ADB0
 	lockall
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	goto SlateportCity_OceanicMuseum_1F_EventScript_PayEntranceFee
 	end
@@ -26,16 +28,16 @@ SlateportCity_OceanicMuseum_1F_EventScript_PayEntranceFee:: @ 820ADC1
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_CheckMoneyForFee
 	closemessage
 	hidemoneybox
-	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_OceanicMuseum_1F_Movement_PushPlayerBackFromCounter
+	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_OceanicMuseum_1F_Movement_PushPlayerBackFromCounter
 	waitmovement 0
 	releaseall
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_CheckMoneyForFee:: @ 820ADE8
 	checkmoney 50, 0
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_NotEnoughMoney
-	playse SE_REGI
+	playse SE_SHOP
 	removemoney 50, 0
 	updatemoneybox 0, 0
 	msgbox SlateportCity_OceanicMuseum_1F_Text_PleaseEnjoyYourself, MSGBOX_DEFAULT
@@ -49,7 +51,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_NotEnoughMoney:: @ 820AE18
 	msgbox SlateportCity_OceanicMuseum_1F_Text_NotEnoughMoney, MSGBOX_DEFAULT
 	closemessage
 	hidemoneybox
-	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_OceanicMuseum_1F_Movement_PushPlayerBackFromCounter
+	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_OceanicMuseum_1F_Movement_PushPlayerBackFromCounter
 	waitmovement 0
 	releaseall
 	end
@@ -146,9 +148,9 @@ SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGrunt:: @ 820AEF8
 	faceplayer
 	delay 8
 	playse SE_PIN
-	applymovement 13, Common_Movement_ExclamationMark
+	applymovement LOCALID_FAMILIAR_GRUNT, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement 13, Common_Movement_Delay48
+	applymovement LOCALID_FAMILIAR_GRUNT, Common_Movement_Delay48
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_1F_Text_RememberMeTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_TM46
@@ -168,29 +170,29 @@ SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGrunt:: @ 820AEF8
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitNorth:: @ 820AF6C
-	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_OceanicMuseum_1F_Movement_PlayerWatchGruntExitNorth
-	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_FamiliarGruntExitNorth
+	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_OceanicMuseum_1F_Movement_PlayerWatchGruntExitNorth
+	applymovement LOCALID_FAMILIAR_GRUNT, SlateportCity_OceanicMuseum_1F_Movement_FamiliarGruntExitNorth
 	waitmovement 0
 	goto SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExited
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitSouth:: @ 820AF83
-	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_FamiliarGruntExit
+	applymovement LOCALID_FAMILIAR_GRUNT, SlateportCity_OceanicMuseum_1F_Movement_FamiliarGruntExit
 	waitmovement 0
 	goto SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExited
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitWestEast:: @ 820AF93
-	applymovement EVENT_OBJ_ID_PLAYER, SlateportCity_OceanicMuseum_1F_Movement_PlayerWatchGruntExitWestEast
-	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_FamiliarGruntExit
+	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_OceanicMuseum_1F_Movement_PlayerWatchGruntExitWestEast
+	applymovement LOCALID_FAMILIAR_GRUNT, SlateportCity_OceanicMuseum_1F_Movement_FamiliarGruntExit
 	waitmovement 0
 	goto SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExited
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExited:: @ 820AFAA
 	setflag FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_FAMILIAR_AQUA_GRUNT
-	playse SE_KAIDAN
-	removeobject 13
+	playse SE_EXIT
+	removeobject LOCALID_FAMILIAR_GRUNT
 	release
 	end
 

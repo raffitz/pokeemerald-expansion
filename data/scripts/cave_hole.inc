@@ -9,9 +9,9 @@ CaveHole_FixCrackedGround: @ 82A8331
 EventScript_FallDownHole:: @ 82A8337
 	lockall
 	delay 20
-	applymovement EVENT_OBJ_ID_PLAYER, Movement_SetInvisible
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_SetInvisible
 	waitmovement 0
-	playse SE_RU_HYUU
+	playse SE_FALL
 	delay 60
 	warphole MAP_UNDEFINED
 	waitstate
@@ -20,9 +20,9 @@ EventScript_FallDownHole:: @ 82A8337
 EventScript_FallDownHoleMtPyre:: @ 82A8350
 	lockall
 	delay 20
-	applymovement EVENT_OBJ_ID_PLAYER, Movement_SetInvisible
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_SetInvisible
 	waitmovement 0
-	playse SE_RU_HYUU
+	playse SE_FALL
 	delay 60
 	special DoFallWarp
 	waitstate

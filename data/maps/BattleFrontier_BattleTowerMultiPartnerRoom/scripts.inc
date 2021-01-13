@@ -1,3 +1,5 @@
+.set LOCALID_ATTENDANT, 1
+
 BattleFrontier_BattleTowerMultiPartnerRoom_MapScripts:: @ 8243D92
 	map_script MAP_SCRIPT_ON_RESUME, BattleFrontier_BattleTowerMultiPartnerRoom_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattleTowerMultiPartnerRoom_OnTransition
@@ -23,17 +25,17 @@ BattleFrontier_BattleTowerMultiPartnerRoom_OnTransition: @ 8243DB0
 	end
 
 BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_ChosePartner:: @ 8243DDA
-	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_BOY_1
-	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_BOY_1
-	setvar VAR_OBJ_GFX_ID_2, EVENT_OBJ_GFX_BOY_1
-	setvar VAR_OBJ_GFX_ID_3, EVENT_OBJ_GFX_BOY_1
-	setvar VAR_OBJ_GFX_ID_4, EVENT_OBJ_GFX_BOY_1
-	setvar VAR_OBJ_GFX_ID_5, EVENT_OBJ_GFX_BOY_1
-	setvar VAR_OBJ_GFX_ID_6, EVENT_OBJ_GFX_BOY_1
-	setvar VAR_OBJ_GFX_ID_7, EVENT_OBJ_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_2, OBJ_EVENT_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_3, OBJ_EVENT_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_4, OBJ_EVENT_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_5, OBJ_EVENT_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_6, OBJ_EVENT_GFX_BOY_1
+	setvar VAR_OBJ_GFX_ID_7, OBJ_EVENT_GFX_BOY_1
 	setvar VAR_TEMP_1, 1
 	setvar VAR_TEMP_3, 1
-	setobjectxyperm 1, 10, 2
+	setobjectxyperm LOCALID_ATTENDANT, 10, 2
 	end
 
 BattleFrontier_BattleTowerMultiPartnerRoom_OnWarp: @ 8243E14
@@ -41,7 +43,7 @@ BattleFrontier_BattleTowerMultiPartnerRoom_OnWarp: @ 8243E14
 	.2byte 0
 
 BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_TurnPlayerNorth:: @ 8243E1E
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattleTowerMultiPartnerRoom_OnFrame: @ 8243E23
@@ -57,12 +59,12 @@ BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_ExitRoom:: @ 8243E35
 
 BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_EnterRoom:: @ 8243E41
 	lockall
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_PlayerEnterRoom
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_PlayerEnterRoom
 	waitmovement 0
-	applymovement 1, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_AttendantBlockExit
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_AttendantBlockExit
 	waitmovement 0
-	copyobjectxytoperm 1
-	applymovement EVENT_OBJ_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	copyobjectxytoperm LOCALID_ATTENDANT
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox BattleFrontier_BattleTowerMultiPartnerRoom_Text_PleaseFindPartner, MSGBOX_DEFAULT
 	special HealPlayerParty
@@ -99,7 +101,7 @@ BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_QuitChallenge:: @ 8243E9D
 BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_EnterElevator:: @ 8243EB5
 	msgbox BattleFrontier_BattleTowerMultiPartnerRoom_Text_ThankYouForChoosingPartner, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_ATTENDANT, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	opendoor 10, 1
 	waitdooranim
@@ -112,22 +114,22 @@ BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_EnterElevator:: @ 8243EB5
 	end
 
 BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_MoveToElevator:: @ 8243EE4
-	applymovement 1, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_AttendantEnterElevator
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_PlayerEnterElevator
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_AttendantEnterElevator
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_PlayerEnterElevator
 	waitmovement 0
 	return
 
 @ Unused
 BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_MoveToElevatorEast: @ 8243EF6
-	applymovement 1, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_AttendantEnterElevator
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_PlayerEnterElevatorEast
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_AttendantEnterElevator
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_PlayerEnterElevatorEast
 	waitmovement 0
 	return
 
 @ Unused
 BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_MoveToElevatorWest: @ 8243F08
-	applymovement 1, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_AttendantEnterElevator
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_PlayerEneterElevatorWest
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_AttendantEnterElevator
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_PlayerEneterElevatorWest
 	waitmovement 0
 	return
 

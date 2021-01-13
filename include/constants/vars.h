@@ -27,7 +27,7 @@
 // object gfx id vars
 // These 0x10 vars are used to dynamically control a map object's sprite.
 // For example, the rival's sprite id is dynamically set based on the player's gender.
-// See VarGetEventObjectGraphicsId().
+// See VarGetObjectEventGraphicsId().
 #define VAR_OBJ_GFX_ID_0           0x4010
 #define VAR_OBJ_GFX_ID_1           0x4011
 #define VAR_OBJ_GFX_ID_2           0x4012
@@ -274,6 +274,7 @@
 #define VAR_UNUSED_0x40FF                    0x40FF // Unused Var
 
 #define VARS_END                             0x40FF
+#define VARS_COUNT                           (VARS_END - VARS_START + 1)
 
 #define SPECIAL_VARS_START            0x8000
 // special vars

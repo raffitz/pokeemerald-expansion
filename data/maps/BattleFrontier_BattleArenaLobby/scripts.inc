@@ -1,3 +1,5 @@
+.set LOCALID_ATTENDANT, 1
+
 BattleFrontier_BattleArenaLobby_MapScripts:: @ 8255C36
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleArenaLobby_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleArenaLobby_OnWarp
@@ -9,7 +11,7 @@ BattleFrontier_BattleArenaLobby_OnWarp: @ 8255C41
 
 BattleFrontier_BattleArenaLobby_EventScript_TurnPlayerNorth:: @ 8255C4B
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattleArenaLobby_OnFrame: @ 8255C55
@@ -206,13 +208,13 @@ BattleFrontier_BattleArenaLobby_EventScript_EndCancelChallenge:: @ 8256003
 	end
 
 BattleFrontier_BattleArenaLobby_EventScript_WalkToDoorLv50:: @ 8256005
-	applymovement 1, BattleFrontier_BattleArenaLobby_Movement_AttendantWalkToLeftDoor
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleArenaLobby_Movement_PlayerWalkToLeftDoor
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattleArenaLobby_Movement_AttendantWalkToLeftDoor
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleArenaLobby_Movement_PlayerWalkToLeftDoor
 	waitmovement 0
 	opendoor 2, 2
 	waitdooranim
-	applymovement 1, BattleFrontier_BattleArenaLobby_Movement_AttendantEnterDoor
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleArenaLobby_Movement_PlayerEnterDoor
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattleArenaLobby_Movement_AttendantEnterDoor
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleArenaLobby_Movement_PlayerEnterDoor
 	waitmovement 0
 	closedoor 2, 2
 	waitdooranim
@@ -255,13 +257,13 @@ BattleFrontier_BattleArenaLobby_Movement_PlayerEnterDoor: @ 825604C
 	step_end
 
 BattleFrontier_BattleArenaLobby_EventScript_WalkToDoorLvOpen:: @ 8256050
-	applymovement 1, BattleFrontier_BattleArenaLobby_Movement_AttendantWalkToRightDoor
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleArenaLobby_Movement_PlayerWalkToRightDoor
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattleArenaLobby_Movement_AttendantWalkToRightDoor
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleArenaLobby_Movement_PlayerWalkToRightDoor
 	waitmovement 0
 	opendoor 11, 2
 	waitdooranim
-	applymovement 1, BattleFrontier_BattleArenaLobby_Movement_AttendantEnterDoor
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleArenaLobby_Movement_PlayerEnterDoor
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattleArenaLobby_Movement_AttendantEnterDoor
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleArenaLobby_Movement_PlayerEnterDoor
 	waitmovement 0
 	closedoor 11, 2
 	waitdooranim

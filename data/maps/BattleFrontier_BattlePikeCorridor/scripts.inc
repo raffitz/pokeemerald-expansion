@@ -1,3 +1,5 @@
+.set LOCALID_ATTENDANT, 1
+
 BattleFrontier_BattlePikeCorridor_MapScripts:: @ 825C771
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePikeCorridor_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePikeCorridor_OnWarp
@@ -12,14 +14,14 @@ BattleFrontier_BattlePikeCorridor_EventScript_EnterCorridor:: @ 825C786
 	frontier_set FRONTIER_DATA_BATTLE_NUM, 1
 	pike_cleartrainerids
 	pike_nohealing TRUE
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeCorridor_Movement_PlayerEnterCorridor
-	applymovement 1, BattleFrontier_BattlePikeCorridor_Movement_AttendantEnterCorridor
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePikeCorridor_Movement_PlayerEnterCorridor
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattlePikeCorridor_Movement_AttendantEnterCorridor
 	waitmovement 0
 	lockall
 	msgbox BattleFrontier_BattlePikeCorridor_Text_YourChallengeHasBegun, MSGBOX_DEFAULT
 	closemessage
 	releaseall
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeCorridor_Movement_PlayerExitCorridor
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePikeCorridor_Movement_PlayerExitCorridor
 	waitmovement 0
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 99
 	call BattleFrontier_BattlePike_EventScript_CloseCurtain
@@ -33,7 +35,7 @@ BattleFrontier_BattlePikeCorridor_OnWarp: @ 825C7F7
 
 BattleFrontier_BattlePikeCorridor_EventScript_TurnPlayerNorth:: @ 825C801
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattlePikeCorridor_Movement_PlayerEnterCorridor: @ 825C80B

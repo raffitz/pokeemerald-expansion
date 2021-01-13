@@ -21,7 +21,7 @@
 #include "constants/items.h"
 #include "constants/layouts.h"
 #include "constants/maps.h"
-#include "constants/species.h"
+#include "constants/weather.h"
 
 extern const u8 EventScript_RepelWoreOff[];
 
@@ -127,12 +127,9 @@ static bool8 CheckFeebas(void)
     return FALSE;
 }
 
-// The number 1103515245 comes from the example implementation of rand and srand
-// in the ISO C standard.
-
 static u16 FeebasRandom(void)
 {
-    sFeebasRngValue = (1103515245 * sFeebasRngValue) + 12345;
+    sFeebasRngValue = ISO_RANDOMIZE2(sFeebasRngValue);
     return sFeebasRngValue >> 16;
 }
 
@@ -186,13 +183,6 @@ static u8 ChooseWildMonIndex_WaterRock(void)
     else
         return 4;
 }
-
-enum
-{
-    OLD_ROD,
-    GOOD_ROD,
-    SUPER_ROD
-};
 
 static u8 ChooseWildMonIndex_Fishing(u8 rod)
 {
@@ -305,29 +295,27 @@ static u8 PickWildMonNature(void)
     u8 i;
     u8 j;
     struct Pokeblock *safariPokeblock;
-    u8 natures[25];
+    u8 natures[NUM_NATURES];
 
     if (GetSafariZoneFlag() == TRUE && Random() % 100 < 80)
     {
         safariPokeblock = SafariZoneGetActivePokeblock();
         if (safariPokeblock != NULL)
         {
-            for (i = 0; i < 25; i++)
+            for (i = 0; i < NUM_NATURES; i++)
                 natures[i] = i;
-            for (i = 0; i < 24; i++)
+            for (i = 0; i < NUM_NATURES - 1; i++)
             {
-                for (j = i + 1; j < 25; j++)
+                for (j = i + 1; j < NUM_NATURES; j++)
                 {
                     if (Random() & 1)
                     {
-                        u8 temp = natures[i];
-
-                        natures[i] = natures[j];
-                        natures[j] = temp;
+                        u8 temp;
+                        SWAP(natures[i], natures[j], temp);
                     }
                 }
             }
-            for (i = 0; i < 25; i++)
+            for (i = 0; i < NUM_NATURES; i++)
             {
                 if (PokeblockGetGain(natures[i], safariPokeblock) > 0)
                     return natures[i];
@@ -339,11 +327,11 @@ static u8 PickWildMonNature(void)
         && GetMonAbility(&gPlayerParty[0]) == ABILITY_SYNCHRONIZE
         && Random() % 2 == 0)
     {
-        return GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY) % 25;
+        return GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY) % NUM_NATURES;
     }
 
     // random nature
-    return Random() % 25;
+    return Random() % NUM_NATURES;
 }
 
 static void CreateWildMon(u16 species, u8 level)
@@ -495,7 +483,7 @@ static bool8 DoWildEncounterRateTest(u32 encounterRate, bool8 ignoreAbility)
             encounterRate /= 2;
         else if (ability == ABILITY_ARENA_TRAP)
             encounterRate *= 2;
-        else if (ability == ABILITY_SAND_VEIL && gSaveBlock1Ptr->weather == 8)
+        else if (ability == ABILITY_SAND_VEIL && gSaveBlock1Ptr->weather == WEATHER_SANDSTORM)
             encounterRate /= 2;
     }
     if (encounterRate > 2880)

@@ -1,3 +1,6 @@
+.set LOCALID_DEOXYS_ROCK, 1
+.set LOCALID_DEOXYS, 2
+
 BirthIsland_Exterior_MapScripts:: @ 8267F15
 	map_script MAP_SCRIPT_ON_TRANSITION, BirthIsland_Exterior_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, BirthIsland_Exterior_OnResume
@@ -10,7 +13,7 @@ BirthIsland_Exterior_OnReturnToField: @ 8267F25
 
 BirthIsland_Exterior_OnTransition: @ 8267F29
 	setflag FLAG_MAP_SCRIPT_CHECKED_DEOXYS
-	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
 	setvar VAR_DEOXYS_ROCK_STEP_COUNT, 0
 	setvar VAR_DEOXYS_ROCK_LEVEL, 0
 	call_if_set FLAG_BATTLED_DEOXYS, BirthIsland_Exterior_EventScript_HideDeoxysAndPuzzle
@@ -36,7 +39,7 @@ BirthIsland_Exterior_EventScript_TryRemoveDeoxys:: @ 8267F6F
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne Common_EventScript_NopReturn
-	removeobject 2
+	removeobject LOCALID_DEOXYS
 	return
 
 BirthIsland_Exterior_EventScript_Triangle:: @ 8267F83
@@ -65,20 +68,20 @@ BirthIsland_Exterior_EventScript_NotSolved3:: @ 8267FBF
 
 BirthIsland_Exterior_EventScript_Deoxys:: @ 8267FC1
 	waitse
-	setfieldeffectargument 0, 1
+	setfieldeffectargument 0, LOCALID_DEOXYS_ROCK
 	setfieldeffectargument 1, 58
 	setfieldeffectargument 2, 26
-	dofieldeffect FLDEFF_65
-	playbgm MUS_RG_DEOEYE, 0
-	waitfieldeffect FLDEFF_65
-	addobject 2
-	applymovement 2, BirthIsland_Exterior_Movement_DeoxysApproach
+	dofieldeffect FLDEFF_DESTROY_DEOXYS_ROCK
+	playbgm MUS_RG_ENCOUNTER_DEOXYS, 0
+	waitfieldeffect FLDEFF_DESTROY_DEOXYS_ROCK
+	addobject LOCALID_DEOXYS
+	applymovement LOCALID_DEOXYS, BirthIsland_Exterior_Movement_DeoxysApproach
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_DEOXYS, 2
 	delay 40
 	waitmoncry
-	setvar VAR_LAST_TALKED, 2
+	setvar VAR_LAST_TALKED, LOCALID_DEOXYS
 	setvar VAR_0x8004, SPECIES_DEOXYS
 	setvar VAR_0x8005, 30 @ level
 	setvar VAR_0x8006, ITEM_NONE

@@ -1,3 +1,5 @@
+.set LOCALID_ATTENDANT, 1
+
 BattleFrontier_BattlePikeLobby_MapScripts:: @ 825B6C6
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePikeLobby_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePikeLobby_OnWarp
@@ -16,7 +18,7 @@ BattleFrontier_BattlePikeLobby_OnWarp: @ 825B6F3
 
 BattleFrontier_BattlePikeLobby_EventScript_TurnPlayerNorth:: @ 825B6FD
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattlePikeLobby_EventScript_GetChallengeStatus:: @ 825B707
@@ -200,8 +202,8 @@ BattleFrontier_BattlePikeLobby_EventScript_ShowResults:: @ 825BA80
 	end
 
 BattleFrontier_BattlePikeLobby_EventScript_WalkToCorridor:: @ 825BA94
-	applymovement 1, BattleFrontier_BattlePikeLobby_Movement_AttendantWalkToCorridor
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattlePikeLobby_Movement_PlayerWalkToCorridor
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattlePikeLobby_Movement_AttendantWalkToCorridor
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePikeLobby_Movement_PlayerWalkToCorridor
 	waitmovement 0
 	return
 
@@ -263,7 +265,7 @@ BattleFrontier_BattlePikeLobby_EventScript_ExitRules:: @ 825BB47
 	end
 
 BattleFrontier_BattlePike_EventScript_CloseCurtain:: @ 825BB49
-	playse SE_CURTAIN
+	playse SE_PIKE_CURTAIN_CLOSE
 	special CloseBattlePikeCurtain
 	waitstate
 	waitse

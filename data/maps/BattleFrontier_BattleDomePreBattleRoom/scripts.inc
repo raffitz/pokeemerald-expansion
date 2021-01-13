@@ -1,3 +1,5 @@
+.set LOCALID_ATTENDANT, 1
+
 BattleFrontier_BattleDomePreBattleRoom_MapScripts:: @ 824B1F9
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleDomePreBattleRoom_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleDomePreBattleRoom_OnWarp
@@ -9,7 +11,7 @@ BattleFrontier_BattleDomePreBattleRoom_OnWarp: @ 824B204
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_TurnPlayerNorth:: @ 824B20E
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattleDomePreBattleRoom_OnFrame: @ 824B218
@@ -21,7 +23,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_EnterRoom:: @ 824B222
 	goto_if_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_ReturnFromBattle
 	frontier_set FRONTIER_DATA_RECORD_DISABLED, TRUE
 	setvar VAR_TEMP_0, 1
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomePreBattleRoom_Movement_PlayerEnter
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomePreBattleRoom_Movement_PlayerEnter
 	waitmovement 0
 	lockall
 BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound:: @ 824B24F
@@ -151,13 +153,13 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_ContinueChallenge:: @ 824B46D
 	dome_setopponent
 	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_RightThisWay, MSGBOX_DEFAULT
 	closemessage
-	applymovement 1, BattleFrontier_BattleDomePreBattleRoom_Movement_AttendantMoveAside
+	applymovement LOCALID_ATTENDANT, BattleFrontier_BattleDomePreBattleRoom_Movement_AttendantMoveAside
 	waitmovement 0
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomePreBattleRoom_Movement_PlayerWalkToDoor
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomePreBattleRoom_Movement_PlayerWalkToDoor
 	waitmovement 0
 	opendoor 5, 1
 	waitdooranim
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomePreBattleRoom_Movement_PlayerEnterDoor
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomePreBattleRoom_Movement_PlayerEnterDoor
 	waitmovement 0
 	closedoor 5, 1
 	waitdooranim
@@ -222,7 +224,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_ReturnFromBattle:: @ 824B5C7
 	msgbox BattleFrontier_BattleDomePreBattleRoom_Text_RestoreMonsToFullHealth, MSGBOX_DEFAULT
 	special LoadPlayerParty
 	frontier_setpartyorder FRONTIER_PARTY_SIZE
-	playfanfare MUS_ME_ASA
+	playfanfare MUS_HEAL
 	waitfanfare
 	special HealPlayerParty
 	call BattleFrontier_BattleDomePreBattleRoom_EventScript_RoundCompleteMessage

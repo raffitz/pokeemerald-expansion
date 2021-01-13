@@ -1,3 +1,6 @@
+.set LOCALID_ATTENDANT_SINGLES, 1
+.set LOCALID_ATTENDANT_DOUBLES, 6
+
 BattleFrontier_BattleDomeLobby_MapScripts:: @ 82497E2
 	map_script MAP_SCRIPT_ON_RESUME, BattleFrontier_BattleDomeLobby_OnResume
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleDomeLobby_OnFrame
@@ -14,7 +17,7 @@ BattleFrontier_BattleDomeLobby_OnWarp: @ 82497FB
 
 BattleFrontier_BattleDomeLobby_EventScript_TurnPlayerNorth:: @ 8249805
 	setvar VAR_TEMP_1, 1
-	turnobject EVENT_OBJ_ID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattleDomeLobby_OnFrame: @ 824980F
@@ -241,7 +244,7 @@ BattleFrontier_BattleDomeLobby_EventScript_WalkToDoor:: @ 8249C6E
 	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_SinglesAttendantWalkToDoor
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_DoublesAttendantWalkToDoor
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomeLobby_Movement_WalkToDoor
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomeLobby_Movement_WalkToDoor
 	waitmovement 0
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_OpenSinglesDoor
@@ -252,7 +255,7 @@ BattleFrontier_BattleDomeLobby_EventScript_WalkToDoor:: @ 8249C6E
 	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_SinglesAttendantEnterDoor
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_DoublesAttendantEnterDoor
-	applymovement EVENT_OBJ_ID_PLAYER, BattleFrontier_BattleDomeLobby_Movement_PlayerEnterDoor
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomeLobby_Movement_PlayerEnterDoor
 	waitmovement 0
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	call_if_eq BattleFrontier_BattleDomeLobby_EventScript_CloseSinglesDoor
@@ -262,19 +265,19 @@ BattleFrontier_BattleDomeLobby_EventScript_WalkToDoor:: @ 8249C6E
 	return
 
 BattleFrontier_BattleDomeLobby_EventScript_SinglesAttendantWalkToDoor:: @ 8249CDD
-	applymovement 1, BattleFrontier_BattleDomeLobby_Movement_WalkToDoor
+	applymovement LOCALID_ATTENDANT_SINGLES, BattleFrontier_BattleDomeLobby_Movement_WalkToDoor
 	return
 
 BattleFrontier_BattleDomeLobby_EventScript_DoublesAttendantWalkToDoor:: @ 8249CE5
-	applymovement 6, BattleFrontier_BattleDomeLobby_Movement_WalkToDoor
+	applymovement LOCALID_ATTENDANT_DOUBLES, BattleFrontier_BattleDomeLobby_Movement_WalkToDoor
 	return
 
 BattleFrontier_BattleDomeLobby_EventScript_SinglesAttendantEnterDoor:: @ 8249CED
-	applymovement 1, BattleFrontier_BattleDomeLobby_Movement_AttendantEnterDoor
+	applymovement LOCALID_ATTENDANT_SINGLES, BattleFrontier_BattleDomeLobby_Movement_AttendantEnterDoor
 	return
 
 BattleFrontier_BattleDomeLobby_EventScript_DoublesAttendantEnterDoor:: @ 8249CF5
-	applymovement 6, BattleFrontier_BattleDomeLobby_Movement_AttendantEnterDoor
+	applymovement LOCALID_ATTENDANT_DOUBLES, BattleFrontier_BattleDomeLobby_Movement_AttendantEnterDoor
 	return
 
 BattleFrontier_BattleDomeLobby_EventScript_WelcomeSingles:: @ 8249CFD
