@@ -43,6 +43,15 @@ MossdeepCity_StevensHouse_EventScript_StevenGivesDive:: @ 82227CA
 	msgbox MossdeepCity_StevensHouse_Text_YouveEarnedHMDive, MSGBOX_DEFAULT
 	giveitem ITEM_HM08
 	setflag FLAG_RECEIVED_HM08
+	@ "Borrowed" this from the Speedchoice team. Speedchoice is awesome and you should play it
+	setflag FLAG_ENABLE_SHIP_SOUTHERN_ISLAND
+	giveitem ITEM_EON_TICKET
+	setflag FLAG_ENABLE_SHIP_BIRTH_ISLAND
+	giveitem ITEM_AURORA_TICKET
+	setflag FLAG_ENABLE_SHIP_FARAWAY_ISLAND
+	giveitem ITEM_OLD_SEA_MAP
+	setflag FLAG_ENABLE_SHIP_NAVEL_ROCK
+	giveitem ITEM_MYSTIC_TICKET
 	setflag FLAG_OMIT_DIVE_FROM_STEVEN_LETTER
 	msgbox MossdeepCity_StevensHouse_Text_ExplainDive, MSGBOX_DEFAULT
 	closemessage
