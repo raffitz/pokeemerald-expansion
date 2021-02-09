@@ -1,71 +1,6 @@
 #ifndef GUARD_CONSTANTS_BATTLE_CONFIG_H
 #define GUARD_CONSTANTS_BATTLE_CONFIG_H
 
-// Species with peculiar battle effects.
-#ifndef POKEMON_EXPANSION
-    #define SPECIES_DIALGA                  0
-    #define SPECIES_PALKIA                  0
-    #define SPECIES_GIRATINA                0
-    #define SPECIES_CHERRIM                 0
-    #define SPECIES_ARCEUS                  0
-    #define SPECIES_SILVALLY                0
-    #define SPECIES_GENESECT                0
-    #define SPECIES_AEGISLASH               0
-    #define SPECIES_AEGISLASH_BLADE         10000
-    #define SPECIES_MIMIKYU                 0
-    #define SPECIES_MIMIKYU_BUSTED          10001
-    #define SPECIES_DARMANITAN              0
-    #define SPECIES_DARMANITAN_ZEN_MODE     10002
-    #define SPECIES_MINIOR_CORE_RED         0
-    #define SPECIES_MINIOR                  10003
-    #define SPECIES_MINIOR_CORE_BLUE        0
-    #define SPECIES_MINIOR_METEOR_BLUE      10004
-    #define SPECIES_MINIOR_CORE_GREEN       0
-    #define SPECIES_MINIOR_METEOR_GREEN     10005
-    #define SPECIES_MINIOR_CORE_INDIGO      0
-    #define SPECIES_MINIOR_METEOR_INDIGO    10006
-    #define SPECIES_MINIOR_CORE_ORANGE      0
-    #define SPECIES_MINIOR_METEOR_ORANGE    10007
-    #define SPECIES_MINIOR_CORE_VIOLET      0
-    #define SPECIES_MINIOR_METEOR_VIOLET    10008
-    #define SPECIES_MINIOR_CORE_YELLOW      0
-    #define SPECIES_MINIOR_METEOR_YELLOW    10009
-    #define SPECIES_WISHIWASHI              0
-    #define SPECIES_WISHIWASHI_SCHOOL       10010
-    #define SPECIES_ZYGARDE                 0     // 50%
-    #define SPECIES_ZYGARDE_10              10011 // 10 %
-    #define SPECIES_ZYGARDE_COMPLETE        10012 // 100 %
-#endif
-
-// Items with peculiar battle effects.
-#ifndef ITEM_EXPANSION
-    #define ITEM_CHOPLE_BERRY   177
-    #define ITEM_KEBIA_BERRY    178
-    #define ITEM_SHUCA_BERRY    179
-    #define ITEM_COBA_BERRY     180
-    #define ITEM_PAYAPA_BERRY   181
-    #define ITEM_TANGA_BERRY    182
-    #define ITEM_CHARTI_BERRY   183
-    #define ITEM_KASIB_BERRY    184
-    #define ITEM_HABAN_BERRY    185
-    #define ITEM_COLBUR_BERRY   186
-    #define ITEM_BABIRI_BERRY   187
-    #define ITEM_CHILAN_BERRY   188
-    #define ITEM_ROSELI_BERRY   189
-    #define ITEM_MICLE_BERRY    197
-    #define ITEM_CUSTAP_BERRY   199
-    #define ITEM_JABOCA_BERRY   200
-    #define ITEM_ROWAP_BERRY    201
-    #define ITEM_KEE_BERRY      202
-    #define ITEM_MARANGA_BERRY  203
-    #define ITEM_OCCA_BERRY     204
-    #define ITEM_PASSHO_BERRY   205
-    #define ITEM_WACAN_BERRY    206
-    #define ITEM_RINDO_BERRY    207
-    #define ITEM_YACHE_BERRY    208
-    #define ITEM_GRISEOUS_ORB   369
-#endif
-
 #ifndef GEN_3
     #define GEN_3 0
     #define GEN_4 1
@@ -80,8 +15,9 @@
 #define B_CRIT_MULTIPLIER           GEN_6 // In Gen6+, critical hits multiply damage by 1.5 instead of 2.
 #define B_EXP_CATCH                 GEN_6 // In Gen6+, Pokémon get experience from catching.
 #define B_TRAINER_EXP_MULTIPLIER    GEN_6 // In Gen7+, trainer battles no longer give a 1.5 multiplier to exp gain.
-#define B_SPLIT_EXP                 GEN_5 // In Gen6+, all participating mon get full experience.
-#define B_SCALED_EXP                GEN_6 // In Gen5 and Gen7+, experience is weighted by level difference.
+// Using Lunos's gen6+ exp share
+//#define B_SPLIT_EXP                 GEN_6 // In Gen6+, all participating mon get full experience.
+//#define B_SCALED_EXP                GEN_7 // In Gen5 and Gen7+, experience is weighted by level difference.
 #define B_BURN_DAMAGE               GEN_6 // In Gen7+, burn damage is 1/16th of max HP instead of 1/8th.
 #define B_PARALYSIS_SPEED           GEN_6 // In Gen7+, speed is decreased by 50% instead of 75%.
 #define B_TERRAIN_TYPE_BOOST        GEN_6 // In Gen8+, damage is boosted by 30% instead of 50%.
