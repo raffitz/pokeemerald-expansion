@@ -14,6 +14,8 @@ enum
 EWRAM_DATA static u8 sLocationHistory[3][2] = {0};
 EWRAM_DATA static u8 sRoamerLocation[2] = {0};
 
+const u16 sRoamerMons[2] = {SPECIES_LATIAS,SPECIES_LATIOS};
+
 static const u8 sRoamerLocations[][6] =
 {
     { MAP_NUM(ROUTE110), MAP_NUM(ROUTE111), MAP_NUM(ROUTE117), MAP_NUM(ROUTE118), MAP_NUM(ROUTE134), 0xFF },
@@ -42,7 +44,7 @@ static const u8 sRoamerLocations[][6] =
 void ClearRoamerData(void)
 {
     memset(&gSaveBlock1Ptr->roamer, 0, sizeof(struct Roamer));
-    (&gSaveBlock1Ptr->roamer)->species = SPECIES_LATIAS;
+    (&gSaveBlock1Ptr->roamer)->species = sRoamerMons[0];
 }
 
 void ClearRoamerLocationData(void)
@@ -59,12 +61,13 @@ void ClearRoamerLocationData(void)
     sRoamerLocation[MAP_NUM] = 0;
 }
 
+
 static void CreateInitialRoamerMon(bool16 createLatios)
 {
     if (!createLatios)
-        (&gSaveBlock1Ptr->roamer)->species = SPECIES_LATIAS;
+        (&gSaveBlock1Ptr->roamer)->species = sRoamerMons[0];
     else
-        (&gSaveBlock1Ptr->roamer)->species = SPECIES_LATIOS;
+        (&gSaveBlock1Ptr->roamer)->species = sRoamerMons[1];
 
     CreateMon(&gEnemyParty[0], (&gSaveBlock1Ptr->roamer)->species, 40, 0x20, 0, 0, OT_ID_PLAYER_ID, 0);
     (&gSaveBlock1Ptr->roamer)->level = 40;
