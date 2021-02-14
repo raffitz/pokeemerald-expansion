@@ -101,27 +101,29 @@
 #define MULTI_UNUSED_SSTIDAL_2             90 //
 #define MULTI_UNUSED_SSTIDAL_3             91 //
 #define MULTI_UNUSED_SSTIDAL_4             92 //
-#define MULTI_FOSSIL                       93
-#define MULTI_YESNO                        94
-#define MULTI_FRONTIER_RULES               95
-#define MULTI_BATTLE_ARENA_RULES           96
-#define MULTI_BATTLE_TOWER_RULES           97
-#define MULTI_BATTLE_DOME_RULES            98
-#define MULTI_BATTLE_FACTORY_RULES         99
-#define MULTI_BATTLE_PALACE_RULES          100
-#define MULTI_BATTLE_PYRAMID_RULES         101
-#define MULTI_BATTLE_PIKE_RULES            102
-#define MULTI_GO_ON_RECORD_REST_RETIRE     103
-#define MULTI_GO_ON_REST_RETIRE            104
-#define MULTI_GO_ON_RECORD_RETIRE          105
-#define MULTI_GO_ON_RETIRE                 106
-#define MULTI_TOURNEY_NO_RECORD            107
-#define MULTI_TV_LATI                      108
-#define MULTI_BATTLE_TOWER_FEELINGS        109
-#define MULTI_WHERES_RAYQUAZA              110
-#define MULTI_SLATEPORT_TENT_RULES         111
-#define MULTI_FALLARBOR_TENT_RULES         112
-#define MULTI_TAG_MATCH_TYPE               113
+#define MULTI_FOSSIL_1                     93
+#define MULTI_FOSSIL_2                     94
+#define MULTI_FOSSIL_3                     95
+#define MULTI_YESNO                        96
+#define MULTI_FRONTIER_RULES               97
+#define MULTI_BATTLE_ARENA_RULES           98
+#define MULTI_BATTLE_TOWER_RULES           99
+#define MULTI_BATTLE_DOME_RULES            100
+#define MULTI_BATTLE_FACTORY_RULES         101
+#define MULTI_BATTLE_PALACE_RULES          102
+#define MULTI_BATTLE_PYRAMID_RULES         103
+#define MULTI_BATTLE_PIKE_RULES            104
+#define MULTI_GO_ON_RECORD_REST_RETIRE     105
+#define MULTI_GO_ON_REST_RETIRE            106
+#define MULTI_GO_ON_RECORD_RETIRE          107
+#define MULTI_GO_ON_RETIRE                 108
+#define MULTI_TOURNEY_NO_RECORD            109
+#define MULTI_TV_LATI                      110
+#define MULTI_BATTLE_TOWER_FEELINGS        111
+#define MULTI_WHERES_RAYQUAZA              112
+#define MULTI_SLATEPORT_TENT_RULES         113
+#define MULTI_FALLARBOR_TENT_RULES         114
+#define MULTI_TAG_MATCH_TYPE               115
 
 // Lilycove SS Tidal Multichoice Selections
 #define SSTIDAL_SELECTION_SLATEPORT        0

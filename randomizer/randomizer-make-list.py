@@ -402,7 +402,7 @@ encounter_id+=1
 
 ## Latias 0x7c01
 pokemon = species['SPECIES_LATIAS']
-mon_labels['sRoamerMons'] = (['hard'],(encounter_id,(pokemon,item)))
+#mon_labels['sRoamerMons'] = (['hard'],(encounter_id,(pokemon,item))) WOULD BE OVERWRITING
 mon_labels['SouthernIsland_Interior_EventScript_SetUpLatias'] = (['setvar'],(encounter_id,(pokemon,item)))
 mon_labels['SouthernIsland_Interior_EventScript_SetLatiasBattleVars'] = (['setvar'],(encounter_id,(pokemon,item)))
 encounter_id+=1
@@ -456,4 +456,4 @@ trade_labels['sIngameTrades'] = [
 		(species['SPECIES_MEOWTH'],items['ITEM_RETRO_MAIL'],species['SPECIES_SKITTY']), # Meowth, Retro Mail, Skitty
 		]
 
-pickle.dump([mon_labels,trade_labels],args.output)
+pickle.dump((mon_labels,trade_labels),args.output)

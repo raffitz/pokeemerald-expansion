@@ -598,11 +598,33 @@ static const struct MenuAction MultichoiceList_UnusedSSTidal4[] =
     {gText_Exit},
 };
 
-static const struct MenuAction MultichoiceList_Fossil[] =
+static const struct MenuAction MultichoiceList_Fossil_1[] =
+{
+    {gText_OldAmber},
+    {gText_DomeFossil},
+    {gText_HelixFossil},
+    {gText_More},
+    {gText_Nothing},
+};
+
+static const struct MenuAction MultichoiceList_Fossil_2[] =
 {
     {gText_ClawFossil},
     {gText_RootFossil},
-    {gText_Exit},
+    {gText_SkullFossil},
+    {gText_ArmorFossil},
+    {gText_More},
+    {gText_Nothing},
+};
+
+static const struct MenuAction MultichoiceList_Fossil_3[] =
+{
+    {gText_CoverFossil},
+    {gText_PlumeFossil},
+    {gText_JawFossil},
+    {gText_SailFossil},
+    {gText_More},
+    {gText_Nothing},
 };
 
 static const struct MenuAction MultichoiceList_YesNo[] =
@@ -877,7 +899,9 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_UNUSED_SSTIDAL_2]           = MULTICHOICE(MultichoiceList_UnusedSSTidal2),
     [MULTI_UNUSED_SSTIDAL_3]           = MULTICHOICE(MultichoiceList_UnusedSSTidal3),
     [MULTI_UNUSED_SSTIDAL_4]           = MULTICHOICE(MultichoiceList_UnusedSSTidal4),
-    [MULTI_FOSSIL]                     = MULTICHOICE(MultichoiceList_Fossil),
+    [MULTI_FOSSIL_1]                   = MULTICHOICE(MultichoiceList_Fossil_1),
+    [MULTI_FOSSIL_2]                   = MULTICHOICE(MultichoiceList_Fossil_2),
+    [MULTI_FOSSIL_3]                   = MULTICHOICE(MultichoiceList_Fossil_3),
     [MULTI_YESNO]                      = MULTICHOICE(MultichoiceList_YesNo),
     [MULTI_FRONTIER_RULES]             = MULTICHOICE(MultichoiceList_FrontierRules),
     [MULTI_BATTLE_ARENA_RULES]         = MULTICHOICE(MultichoiceList_BattleArenaRules),
