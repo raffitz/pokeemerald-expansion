@@ -254,9 +254,9 @@ RustboroCity_DevonCorp_3F_Text_ThankYouForDeliveringLetter: @ 8212A29
 
 RustboroCity_DevonCorp_3F_Text_ExplainExpShare: @ 8212A9E
 	.string "MR. STONE: That is onde of our special\n"
-	.string "MASTER BALLS. It will catch any wild \n"
-	.string "POKéMON without fail.\p"
-	.string "They are exceedingly rare, due to\n"
+	.string "MASTER BALLS. It will catch any wild \p"
+	.string "POKéMON without fail.\n"
+	.string "They are exceedingly rare, due to\p"
 	.string "manufacturing costs, so be sure to\n"
 	.string "save it for a special occasion.$"
 
