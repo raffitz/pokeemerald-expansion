@@ -299,39 +299,40 @@ item = None
 ### Cyndaquil 0x9b00
 pokemon = species['SPECIES_CYNDAQUIL']
 mon_labels['LittlerootTown_ProfessorBirchsLab_EventScript_Cyndaquil'] = (['showmonpic'],(encounter_id,(pokemon,item)))
-mon_labels['LittlerootTown_ProfessorBirchsLab_EventScript_GiveCyndaquil'] = (['buffername','setvar','givemon'],(encounter_id,(pokemon,item)))
+mon_labels['LittlerootTown_ProfessorBirchsLab_EventScript_GiveCyndaquil'] = (['bufferspeciesname','setvar','givemon'],(encounter_id,(pokemon,item)))
 encounter_id+=1
 
 ### Chikorita 0x9800
 pokemon = species['SPECIES_CHIKORITA']
 mon_labels['LittlerootTown_ProfessorBirchsLab_EventScript_Chikorita'] = (['showmonpic'],(encounter_id,(pokemon,item)))
-mon_labels['LittlerootTown_ProfessorBirchsLab_EventScript_GiveChikorita'] = (['buffername','setvar','givemon'],(encounter_id,(pokemon,item)))
+mon_labels['LittlerootTown_ProfessorBirchsLab_EventScript_GiveChikorita'] = (['bufferspeciesname','setvar','givemon'],(encounter_id,(pokemon,item)))
 encounter_id+=1
 
 ### Totodile 0x9e00
 pokemon = species['SPECIES_TOTODILE']
 mon_labels['LittlerootTown_ProfessorBirchsLab_EventScript_Totodile'] = (['showmonpic'],(encounter_id,(pokemon,item)))
-mon_labels['LittlerootTown_ProfessorBirchsLab_EventScript_GiveTotodile'] = (['buffername','setvar','givemon'],(encounter_id,(pokemon,item)))
+mon_labels['LittlerootTown_ProfessorBirchsLab_EventScript_GiveTotodile'] = (['bufferspeciesname','setvar','givemon'],(encounter_id,(pokemon,item)))
 encounter_id+=1
 
 ### Beldum 0x7601
 pokemon = species['SPECIES_BELDUM']
 mon_labels['MossdeepCity_StevensHouse_EventScript_GiveBeldum'] = (['setvar','givemon'],(encounter_id,(pokemon,item)))
-mon_labels['MossdeepCity_StevensHouse_EventScript_ReceivedBeldumFanfare'] = (['buffername','buffername'],(encounter_id,(pokemon,item)))
+mon_labels['MossdeepCity_StevensHouse_EventScript_ReceivedBeldumFanfare'] = (['bufferspeciesname','bufferspeciesname'],(encounter_id,(pokemon,item)))
 encounter_id+=1
 
 ### Castform 0x5f01 (HOLDING MYSTIC WATER 0xf800)
 pokemon = species['SPECIES_CASTFORM']
 item = items['ITEM_MYSTIC_WATER']
 mon_labels['Route119_WeatherInstitute_2F_EventScript_ReceiveCastform'] = (['setvar','givemon'],(encounter_id,(pokemon,item)))
-mon_labels['Route119_WeatherInstitute_2F_EventScript_ReceivedCastformFanfare'] = (['buffername'],(encounter_id,(pokemon,item)))
+mon_labels['Route119_WeatherInstitute_2F_EventScript_ReceivedCastformFanfare'] = (['bufferspeciesname'],(encounter_id,(pokemon,item)))
 encounter_id+=1
 
 item = None
 
 ### Wynaut Egg 0x6801
 pokemon = species['SPECIES_WYNAUT']
-mon_labels['LavaridgeTown_EventScript_EggWoman'] = (['giveegg'],None)
+mon_labels['LavaridgeTown_EventScript_EggWoman'] = (['giveegg'],(encounter_id,(pokemon,item)))
+encounter_id+=1
 
 # Static encounters:
 
@@ -444,6 +445,73 @@ mon_labels['Route120_EventScript_StevenBattleKecleon'] = (['playmoncry','setwild
 encounter_id+=1
 
 mon_labels['EventScript_BattleKecleon'] = (['playmoncry','setwildbattle'],(encounter_id,(pokemon,item)))
+encounter_id+=1
+
+## Fossils
+pokemon = species['SPECIES_AERODACTYL']
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_AerodactylReady'] = (['bufferspeciesname'],(encounter_id,(pokemon,item)))
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_ReceiveAerodactyl'] = (['setvar','givemon'],(encounter_id,(pokemon,item)))
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_ReceivedAerodactylFanfare'] = (['bufferspeciesname','bufferspeciesname'],(encounter_id,(pokemon,item)))
+encounter_id+=1
+
+pokemon = species['SPECIES_KABUTO']
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_KabutoReady'] = (['bufferspeciesname'],(encounter_id,(pokemon,item)))
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_ReceiveKabuto'] = (['setvar','givemon'],(encounter_id,(pokemon,item)))
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_ReceivedKabutoFanfare'] = (['bufferspeciesname','bufferspeciesname'],(encounter_id,(pokemon,item)))
+encounter_id+=1
+
+pokemon = species['SPECIES_OMANYTE']
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_OmanyteReady'] = (['bufferspeciesname'],(encounter_id,(pokemon,item)))
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_ReceiveOmanyte'] = (['setvar','givemon'],(encounter_id,(pokemon,item)))
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_ReceivedOmanyteFanfare'] = (['bufferspeciesname','bufferspeciesname'],(encounter_id,(pokemon,item)))
+encounter_id+=1
+
+pokemon = species['SPECIES_ANORITH']
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_AnorithReady'] = (['bufferspeciesname'],(encounter_id,(pokemon,item)))
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_ReceiveAnorith'] = (['setvar','givemon'],(encounter_id,(pokemon,item)))
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_ReceivedAnorithFanfare'] = (['bufferspeciesname','bufferspeciesname'],(encounter_id,(pokemon,item)))
+encounter_id+=1
+
+pokemon = species['SPECIES_LILEEP']
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_LileepReady'] = (['bufferspeciesname'],(encounter_id,(pokemon,item)))
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_ReceiveLileep'] = (['setvar','givemon'],(encounter_id,(pokemon,item)))
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_ReceivedLileepFanfare'] = (['bufferspeciesname','bufferspeciesname'],(encounter_id,(pokemon,item)))
+encounter_id+=1
+
+pokemon = species['SPECIES_CRANIDOS']
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_CranidosReady'] = (['bufferspeciesname'],(encounter_id,(pokemon,item)))
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_ReceiveCranidos'] = (['setvar','givemon'],(encounter_id,(pokemon,item)))
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_ReceivedCranidosFanfare'] = (['bufferspeciesname','bufferspeciesname'],(encounter_id,(pokemon,item)))
+encounter_id+=1
+
+pokemon = species['SPECIES_SHIELDON']
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_ShieldonReady'] = (['bufferspeciesname'],(encounter_id,(pokemon,item)))
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_ReceiveShieldon'] = (['setvar','givemon'],(encounter_id,(pokemon,item)))
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_ReceivedShieldonFanfare'] = (['bufferspeciesname','bufferspeciesname'],(encounter_id,(pokemon,item)))
+encounter_id+=1
+
+pokemon = species['SPECIES_TIRTOUGA']
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_TirtougaReady'] = (['bufferspeciesname'],(encounter_id,(pokemon,item)))
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_ReceiveTirtouga'] = (['setvar','givemon'],(encounter_id,(pokemon,item)))
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_ReceivedTirtougaFanfare'] = (['bufferspeciesname','bufferspeciesname'],(encounter_id,(pokemon,item)))
+encounter_id+=1
+
+pokemon = species['SPECIES_ARCHEN']
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_ArchenReady'] = (['bufferspeciesname'],(encounter_id,(pokemon,item)))
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_ReceiveArchen'] = (['setvar','givemon'],(encounter_id,(pokemon,item)))
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_ReceivedArchenFanfare'] = (['bufferspeciesname','bufferspeciesname'],(encounter_id,(pokemon,item)))
+encounter_id+=1
+
+pokemon = species['SPECIES_TYRUNT']
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_TyruntReady'] = (['bufferspeciesname'],(encounter_id,(pokemon,item)))
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_ReceiveTyrunt'] = (['setvar','givemon'],(encounter_id,(pokemon,item)))
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_ReceivedTyruntFanfare'] = (['bufferspeciesname','bufferspeciesname'],(encounter_id,(pokemon,item)))
+encounter_id+=1
+
+pokemon = species['SPECIES_AMAURA']
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_AmauraReady'] = (['bufferspeciesname'],(encounter_id,(pokemon,item)))
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_ReceiveAmaura'] = (['setvar','givemon'],(encounter_id,(pokemon,item)))
+mon_labels['RustboroCity_DevonCorp_2F_EventScript_ReceivedAmauraFanfare'] = (['bufferspeciesname','bufferspeciesname'],(encounter_id,(pokemon,item)))
 encounter_id+=1
 
 # Trades
