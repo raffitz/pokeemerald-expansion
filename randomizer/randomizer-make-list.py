@@ -7,6 +7,7 @@ import pickle
 parser = argparse.ArgumentParser(description='Build label list')
 parser.add_argument('species',type=open,help='The species header (include/constants/species.h)')
 parser.add_argument('items',type=open,help='The items header (include/constants/items.h)')
+parser.add_argument('reference',type=argparse.FileType('wb'),help='The output reference file')
 parser.add_argument('output',type=argparse.FileType('wb'),help='The output label file')
 
 args = parser.parse_args()
@@ -15,6 +16,8 @@ species = {}
 
 lines = args.species.readlines()
 
+forms_start = None
+
 for line in lines:
 	elements = line.split()
 	if len(elements) < 3:
@@ -22,14 +25,32 @@ for line in lines:
 	if elements[0] != '#define':
 		continue
 	if not elements[1].startswith('SPECIES_'):
+		if elements[1] == 'FORMS_START':
+			if elements[2] in species:
+				forms_start = species[elements[2]]
+			else:
+				print('WARN unrecognized forms_start %s'%elements[2])
 		continue
-	try:
-		value = int(elements[2])
-		if elements[1] in species:
-			print('WARN %s %d %d'%(elements[1],species[elements[1]],value))
-		species[elements[1]] = value
-	except:
-		pass
+	if elements[2] == 'FORMS_START':
+		try:
+			value = int(elements[4])
+			if elements[1] in species:
+				print('WARN %s %d %s'%(elements[1],species[elements[1]],line))
+			if elements[3] == '+':
+				species[elements[1]] = forms_start + value
+			elif elements[3] == '-':
+				species[elements[1]] = forms_start - value
+		except:
+			print('WARN unrecognised format for relative forms offset %s'%line)
+			pass
+	else:
+		try:
+			value = int(elements[2])
+			if elements[1] in species:
+				print('WARN %s %d %d'%(elements[1],species[elements[1]],value))
+			species[elements[1]] = value
+		except:
+			pass
 
 items = {}
 
@@ -52,6 +73,11 @@ for line in lines:
 		items[elements[1]] = value
 	except:
 		pass
+
+pickle.dump((species,items),args.reference)
+args.reference.close()
+args.species.close()
+args.items.close()
 
 #print(species)
 #print(items)
@@ -525,3 +551,4 @@ trade_labels['sIngameTrades'] = [
 		]
 
 pickle.dump((mon_labels,trade_labels),args.output)
+args.output.close()
