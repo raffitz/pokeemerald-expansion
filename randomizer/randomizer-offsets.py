@@ -11,10 +11,12 @@ parser.add_argument('output',type=argparse.FileType('wb'),help='The output offse
 
 args = parser.parse_args()
 
-(mon_labels,trade_labels) = pickle.load(args.labels)
+(mon_labels,trade_labels,foe_item_labels,foe_labels) = pickle.load(args.labels)
 
 mon_addresses = set()
 trade_addresses = set()
+foe_item_addresses = set()
+foe_addresses = set()
 
 # Mons Format: (Address, Catch Em All, exclusive ID)
 mons = []
@@ -294,6 +296,7 @@ def process_trade(address,data,label):
 	for entry in data:
 		args.binary.seek(address)
 		(pkmn,item,requested) = entry
+		# struct defined in src/trade.c
 		_nickname = args.binary.read(11)	# POKEMON_NAME_LENGTH + 1		11	11	0x0b
 		_noise = args.binary.read(1)		# PADDING				1	12	0x0c
 		species = args.binary.read(2)		#					2	14	0x0e
@@ -313,21 +316,73 @@ def process_trade(address,data,label):
 		_noise = args.binary.read(2)		# PADDING				3	36	0x3c
 		species_i = int.from_bytes(species, byteorder='little', signed=False)
 		if species_i != pkmn:
-			print('WARN in-game-trade pkmn mismatch %d != %d'%(pkmn,species_i))
+			print('WARN in-game-trade pkmn mismatch %d != %d %s'%(pkmn,species_i,label))
 		else:
 			mons.append((address + 0x0c,False,trade_offset + trade_counter))
 		hitem_i = int.from_bytes(hitem, byteorder='little', signed=False)
 		if hitem_i != item:
-			print('WARN in-game-trade held item mismatch %d != %d'%(item,hitem_i))
+			print('WARN in-game-trade held item mismatch %d != %d %s'%(item,hitem_i,label))
 		else:
 			items.append((address + 0x28,False,trade_offset + trade_counter))
 		tradereq_i = int.from_bytes(tradereq, byteorder='little', signed=False)
 		if tradereq_i != requested:
-			print('WARN in-game-trade request mismatch %d != %d'%(requested,tradereq_i))
+			print('WARN in-game-trade request mismatch %d != %d %s'%(requested,tradereq_i,label))
 		else:
 			mons.append((address + 0x38,False,None))
 		address += 0x3c
 		trade_counter += 1
+
+foe_counter = 0
+foe_offset = 150
+
+def process_foe_item(address,data,label):
+	global mons
+	global items
+	global foe_counter
+	global foe_offset
+	for entry in data:
+		args.binary.seek(address)
+		(pkmn,item) = entry
+		# struct defined in include/data.h
+		_iv = args.binary.read(2)
+		_lvl = args.binary.read(1)
+		_noise = args.binary.read(1)
+		species = args.binary.read(2)
+		hitem = args.binary.read(2)
+
+		species_i = int.from_bytes(species, byteorder='little', signed=False)
+		if species_i != pkmn:
+			print('WARN foe item pkmn mismatch %d != %d %s'%(pkmn,species_i,label))
+		else:
+			mons.append((address + 0x0c,False,foe_offset + foe_counter))
+		hitem_i = int.from_bytes(hitem, byteorder='little', signed=False)
+		if hitem_i != item:
+			print('WARN foe item item mismatch %d != %d %s'%(item,hitem_i,label))
+		else:
+			items.append((address + 0x28,False,foe_offset + foe_counter))
+		address += 8
+		foe_counter += 1
+
+def process_foe(address,data,label):
+	global mons
+	global items
+	global foe_counter
+	global foe_offset
+	for pkmn in data:
+		args.binary.seek(address)
+		# struct defined in include/data.h
+		_iv = args.binary.read(2)
+		_lvl = args.binary.read(1)
+		_noise = args.binary.read(1)
+		species = args.binary.read(2)
+
+		species_i = int.from_bytes(species, byteorder='little', signed=False)
+		if species_i != pkmn:
+			print('WARN foe pkmn mismatch %d != %d %s'%(pkmn,species_i,label))
+		else:
+			mons.append((address + 0x0c,False,foe_offset + foe_counter))
+		address += 8
+		foe_counter += 1
 
 
 lines = args.table.readlines()
@@ -355,7 +410,25 @@ for line in lines:
 			trade_addresses.add(elements[-1])
 		except ValueError:
 			pass
-	# TODO other labels (trades, enemies, items)
+	if elements[-1] in foe_item_labels:
+		try:
+			value = int(elements[0],16) - 0x8000000
+			# print('DEBG \taddress = %d'%value)
+			data = foe_item_labels[elements[-1]]
+			process_foe_item(value,data,elements[-1])
+			foe_item_addresses.add(elements[-1])
+		except ValueError:
+			pass
+	if elements[-1] in foe_labels:
+		try:
+			value = int(elements[0],16) - 0x8000000
+			# print('DEBG \taddress = %d'%value)
+			data = foe_labels[elements[-1]]
+			process_foe(value,data,elements[-1])
+			foe_addresses.add(elements[-1])
+		except ValueError:
+			pass
+	# TODO other labels (items)
 
 missing_mons = mon_addresses.difference(set(mon_labels.keys()))
 for label in missing_mons:
