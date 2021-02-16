@@ -18,11 +18,13 @@ trade_addresses = set()
 
 # Mons Format: (Address, Catch Em All, exclusive ID)
 mons = []
-# Items Format: (Address, is_tm)
+# Items Format: (Address, is_tm, exclusive ID associated)
 items = []
 
 
-def process_mon(address,data,label='(missing)'):
+def process_mon(address,data,label):
+	global mons
+	global items
 	(entry_types,more_data) = data
 	for entry_type in entry_types:
 		# print('DEBG \t%s'%entry_type)
@@ -144,13 +146,13 @@ def process_mon(address,data,label='(missing)'):
 								item_bin = args.binary.read(2)
 								item_read = int.from_bytes(item_bin, byteorder='little', signed=False)
 								if item_read == item:
-									items.append((start + 4,False))
+									items.append((start + 4,False,eid))
 									entry = (start + 1, False, eid)
 									address = start + 6
 								else:
 									mismatch_item = item_read
 							else:
-								items.append((start + 4,False))
+								items.append((start + 4,False,eid))
 								entry = (start + 1, False, eid)
 								address = start + 6
 						else:
@@ -232,13 +234,13 @@ def process_mon(address,data,label='(missing)'):
 								item_bin = args.binary.read(2)
 								item_read = int.from_bytes(item_bin, byteorder='little', signed=False)
 								if item_read == item:
-									items.append((start + 4,False))
+									items.append((start + 4,False,eid))
 									entry = (start + 1, False, eid)
 									address = start + 6
 								else:
 									mismatch_item = item_read
 							else:
-								items.append((start + 4,False))
+								items.append((start + 4,False,eid))
 								entry = (start + 1, False, eid)
 								address = start + 6
 						else:
@@ -281,6 +283,53 @@ def process_mon(address,data,label='(missing)'):
 					# print('DEBG \t\tAdding entry')
 					mons.append(entry)
 
+trade_counter = 0
+trade_offset = 100
+
+def process_trade(address,data,label):
+	global mons
+	global items
+	global trade_counter
+	global trade_offset
+	for entry in data:
+		args.binary.seek(address)
+		(pkmn,item,requested) = entry
+		_nickname = args.binary.read(11)	# POKEMON_NAME_LENGTH + 1		11	11	0x0b
+		_noise = args.binary.read(1)		# PADDING				1	12	0x0c
+		species = args.binary.read(2)		#					2	14	0x0e
+		_ivs = args.binary.read(6)		# NUM_STATS				6	20	0x14
+		_abn = args.binary.read(1)		#					1	21	0x15
+		_noise = args.binary.read(3)		# PADDING				3	24	0x18
+		_otid = args.binary.read(4)		#					4	28	0x1c
+		_cond = args.binary.read(5)		# CONTEST_CATEGORIES_COUNT		5	33	0x21
+		_noise = args.binary.read(3)		# PADDING				3	36	0x24
+		_pers = args.binary.read(4)		#					4	40	0x28
+		hitem = args.binary.read(2)		#					2	42	0x2a
+		_mail = args.binary.read(1)		#					1	43	0x2b
+		_otname = args.binary.read(11)		#					11	54	0x36
+		_otgndr = args.binary.read(1)		#					1	55	0x37
+		_sheen = args.binary.read(1)		#					1	56	0x38
+		tradereq = args.binary.read(2)		#					2	58	0x3a
+		_noise = args.binary.read(2)		# PADDING				3	36	0x3c
+		species_i = int.from_bytes(species, byteorder='little', signed=False)
+		if species_i != pkmn:
+			print('WARN in-game-trade pkmn mismatch %d != %d'%(pkmn,species_i))
+		else:
+			mons.append((address + 0x0c,False,trade_offset + trade_counter))
+		hitem_i = int.from_bytes(hitem, byteorder='little', signed=False)
+		if hitem_i != item:
+			print('WARN in-game-trade held item mismatch %d != %d'%(item,hitem_i))
+		else:
+			items.append((address + 0x28,False,trade_offset + trade_counter))
+		tradereq_i = int.from_bytes(tradereq, byteorder='little', signed=False)
+		if tradereq_i != requested:
+			print('WARN in-game-trade request mismatch %d != %d'%(requested,tradereq_i))
+		else:
+			mons.append((address + 0x38,False,None))
+		address += 0x3c
+		trade_counter += 1
+
+
 lines = args.table.readlines()
 
 for line in lines:
@@ -297,11 +346,24 @@ for line in lines:
 			mon_addresses.add(elements[-1])
 		except ValueError:
 			pass
+	if elements[-1] in trade_labels:
+		try:
+			value = int(elements[0],16) - 0x8000000
+			# print('DEBG \taddress = %d'%value)
+			data = trade_labels[elements[-1]]
+			process_trade(value,data,elements[-1])
+			trade_addresses.add(elements[-1])
+		except ValueError:
+			pass
 	# TODO other labels (trades, enemies, items)
 
 missing_mons = mon_addresses.difference(set(mon_labels.keys()))
 for label in missing_mons:
-	print('WARN missing label %s'%label)
+	print('WARN missing mon label %s'%label)
+
+missing_trades = trade_addresses.difference(set(trade_labels.keys()))
+for label in missing_trades:
+	print('WARN missing trade label %s'%label)
 
 pickle.dump((mons,items),args.output)
 args.output.close()

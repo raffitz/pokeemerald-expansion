@@ -1097,6 +1097,103 @@ mon_options = [
 		species['SPECIES_INDEEDEE_FEMALE']
 		]
 
+megas = {
+		species['SPECIES_BULBASAUR']: (items['ITEM_VENUSAURITE'],None),
+		species['SPECIES_IVYSAUR']: (items['ITEM_VENUSAURITE'],None),
+		species['SPECIES_VENUSAUR']: (items['ITEM_VENUSAURITE'],None),
+		species['SPECIES_CHARMANDER']: (items['ITEM_CHARIZARDITE_Y'],items['ITEM_CHARIZARDITE_X']),
+		species['SPECIES_CHARMELEON']: (items['ITEM_CHARIZARDITE_Y'],items['ITEM_CHARIZARDITE_X']),
+		species['SPECIES_CHARIZARD']: (items['ITEM_CHARIZARDITE_Y'],items['ITEM_CHARIZARDITE_X']),
+		species['SPECIES_SQUIRTLE']: (items['ITEM_BLASTOISINITE'],None),
+		species['SPECIES_WARTORTLE']: (items['ITEM_BLASTOISINITE'],None),
+		species['SPECIES_BLASTOISE']: (items['ITEM_BLASTOISINITE'],None),
+		species['SPECIES_WEEDLE']: (items['ITEM_BEEDRILLITE'],None),
+		species['SPECIES_KAKUNA']: (items['ITEM_BEEDRILLITE'],None),
+		species['SPECIES_BEEDRILL']: (items['ITEM_BEEDRILLITE'],None),
+		species['SPECIES_PIDGEY']: (items['ITEM_PIDGEOTITE'],None),
+		species['SPECIES_PIDGEOTTO']: (items['ITEM_PIDGEOTITE'],None),
+		species['SPECIES_PIDGEOT']: (items['ITEM_PIDGEOTITE'],None),
+		species['SPECIES_ABRA']: (items['ITEM_ALAKAZITE'],None),
+		species['SPECIES_KADABRA']: (items['ITEM_ALAKAZITE'],None),
+		species['SPECIES_ALAKAZAM']: (items['ITEM_ALAKAZITE'],None),
+		species['SPECIES_SLOWPOKE']: (items['ITEM_SLOWBRONITE'],None),
+		species['SPECIES_SLOWBRO']: (items['ITEM_SLOWBRONITE'],None),
+		species['SPECIES_GASTLY']: (items['ITEM_GENGARITE'],None),
+		species['SPECIES_HAUNTER']: (items['ITEM_GENGARITE'],None),
+		species['SPECIES_GENGAR']: (items['ITEM_GENGARITE'],None),
+		species['SPECIES_KANGASKHAN']: (items['ITEM_KANGASKHANITE'],None),
+		species['SPECIES_PINSIR']: (items['ITEM_PINSIRITE'],None),
+		species['SPECIES_MAGIKARP']: (items['ITEM_GYARADOSITE'],None),
+		species['SPECIES_GYARADOS']: (items['ITEM_GYARADOSITE'],None),
+		species['SPECIES_AERODACTYL']: (items['ITEM_AERODACTYLITE'],None),
+		species['SPECIES_MEWTWO']: (items['ITEM_MEWTWONITE_Y'],items['ITEM_MEWTWONITE_X']),
+		species['SPECIES_MAREEP']: (items['ITEM_AMPHAROSITE'],None),
+		species['SPECIES_FLAAFFY']: (items['ITEM_AMPHAROSITE'],None),
+		species['SPECIES_AMPHAROS']: (items['ITEM_AMPHAROSITE'],None),
+		species['SPECIES_ONIX']: (items['ITEM_STEELIXITE'],None),
+		species['SPECIES_STEELIX']: (items['ITEM_STEELIXITE'],None),
+		species['SPECIES_SCYTHER']: (items['ITEM_SCIZORITE'],None),
+		species['SPECIES_SCIZOR']: (items['ITEM_SCIZORITE'],None),
+		species['SPECIES_HERACROSS']: (items['ITEM_HERACRONITE'],None),
+		species['SPECIES_HOUNDOUR']: (items['ITEM_HOUNDOOMINITE'],None),
+		species['SPECIES_HOUNDOOM']: (items['ITEM_HOUNDOOMINITE'],None),
+		species['SPECIES_LARVITAR']: (items['ITEM_TYRANITARITE'],None),
+		species['SPECIES_PUPITAR']: (items['ITEM_TYRANITARITE'],None),
+		species['SPECIES_TYRANITAR']: (items['ITEM_TYRANITARITE'],None),
+		species['SPECIES_TREECKO']: (items['ITEM_SCEPTILITE'],None),
+		species['SPECIES_GROVYLE']: (items['ITEM_SCEPTILITE'],None),
+		species['SPECIES_SCEPTILE']: (items['ITEM_SCEPTILITE'],None),
+		species['SPECIES_TORCHIC']: (items['ITEM_BLAZIKENITE'],None),
+		species['SPECIES_COMBUSKEN']: (items['ITEM_BLAZIKENITE'],None),
+		species['SPECIES_BLAZIKEN']: (items['ITEM_BLAZIKENITE'],None),
+		species['SPECIES_MUDKIP']: (items['ITEM_SWAMPERTITE'],None),
+		species['SPECIES_MARSHTOMP']: (items['ITEM_SWAMPERTITE'],None),
+		species['SPECIES_SWAMPERT']: (items['ITEM_SWAMPERTITE'],None),
+		species['SPECIES_SABLEYE']: (items['ITEM_SABLENITE'],None),
+		species['SPECIES_MAWILE']: (items['ITEM_MAWILITE'],None),
+		species['SPECIES_ARON']: (items['ITEM_AGGRONITE'],None),
+		species['SPECIES_LAIRON']: (items['ITEM_AGGRONITE'],None),
+		species['SPECIES_AGGRON']: (items['ITEM_AGGRONITE'],None),
+		species['SPECIES_MEDITITE']: (items['ITEM_MEDICHAMITE'],None),
+		species['SPECIES_MEDICHAM']: (items['ITEM_MEDICHAMITE'],None),
+		species['SPECIES_ELECTRIKE']: (items['ITEM_MANECTITE'],None),
+		species['SPECIES_MANECTRIC']: (items['ITEM_MANECTITE'],None),
+		species['SPECIES_CARVANHA']: (items['ITEM_SHARPEDONITE'],None),
+		species['SPECIES_SHARPEDO']: (items['ITEM_SHARPEDONITE'],None),
+		species['SPECIES_NUMEL']: (items['ITEM_CAMERUPTITE'],None),
+		species['SPECIES_CAMERUPT']: (items['ITEM_CAMERUPTITE'],None),
+		species['SPECIES_ABSOL']: (items['ITEM_ABSOLITE'],None),
+		species['SPECIES_SHUPPET']: (items['ITEM_BANETTITE'],None),
+		species['SPECIES_BANETTE']: (items['ITEM_BANETTITE'],None),
+		species['SPECIES_SNORUNT']: (items['ITEM_GLALITITE'],None),
+		species['SPECIES_GLALIE']: (items['ITEM_GLALITITE'],None),
+		species['SPECIES_SWABLU']: (items['ITEM_ALTARIANITE'],None),
+		species['SPECIES_ALTARIA']: (items['ITEM_ALTARIANITE'],None),
+		species['SPECIES_RALTS']: (items['ITEM_GARDEVOIRITE'],None),
+		species['SPECIES_KIRLIA']: (items['ITEM_GARDEVOIRITE'],items['ITEM_GALLADITE']),
+		species['SPECIES_GARDEVOIR']: (items['ITEM_GARDEVOIRITE'],None),
+		species['SPECIES_GALLADE']: (items['ITEM_GALLADITE'],None),
+		species['SPECIES_BAGON']: (items['ITEM_SALAMENCITE'],None),
+		species['SPECIES_SHELGON']: (items['ITEM_SALAMENCITE'],None),
+		species['SPECIES_SALAMENCE']: (items['ITEM_SALAMENCITE'],None),
+		species['SPECIES_BELDUM']: (items['ITEM_METAGROSSITE'],None),
+		species['SPECIES_METANG']: (items['ITEM_METAGROSSITE'],None),
+		species['SPECIES_METAGROSS']: (items['ITEM_METAGROSSITE'],None),
+		species['SPECIES_LATIOS']: (items['ITEM_LATIOSITE'],None),
+		species['SPECIES_LATIAS']: (items['ITEM_LATIASITE'],None),
+		species['SPECIES_BUNEARY']: (items['ITEM_LOPUNNITE'],None),
+		species['SPECIES_LOPUNNY']: (items['ITEM_LOPUNNITE'],None),
+		species['SPECIES_GIBLE']: (items['ITEM_GARCHOMPITE'],None),
+		species['SPECIES_GABITE']: (items['ITEM_GARCHOMPITE'],None),
+		species['SPECIES_GARCHOMP']: (items['ITEM_GARCHOMPITE'],None),
+		species['SPECIES_RIOLU']: (items['ITEM_LUCARIONITE'],None),
+		species['SPECIES_LUCARIO']: (items['ITEM_LUCARIONITE'],None),
+		species['SPECIES_SNOVER']: (items['ITEM_ABOMASITE'],None),
+		species['SPECIES_ABOMASNOW']: (items['ITEM_ABOMASITE'],None),
+		species['SPECIES_AUDINO']: (items['ITEM_AUDINITE'],None),
+		species['SPECIES_DIANCIE']: (items['ITEM_DIANCITE'],None),
+		}
+
 items_nontm = [
 		items['ITEM_MASTER_BALL'],
 		items['ITEM_ULTRA_BALL'],
@@ -1549,7 +1646,29 @@ def get_item_tm():
 	global items_tm
 	return random.choice(items_tm)
 
-eids = {}
+mon_eids = {}
+item_eids = {}
+
+def get_mon_eid(eid_val):
+	global mon_eids
+	return mon_eids.setdefault(eid_val,get_mon_ncea())
+
+def get_item_eid(eid_val):
+	global mon_eids
+	global item_eids
+	global megas
+
+	if eid_val in item_eids:
+		return item_eids[eid_val]
+	mon = get_mon_eid(eid_val)
+	if mon in megas:
+		(common,rare) = megas[mon]
+		chance = random.randint(0,100)
+		if chance < 50:
+			return item_eids.setdefault(eid_val,common)
+		if rare is not None and chance < 55:
+			return item_eids.setdefault(eid_val,rare)
+	return item_eids.setdefault(eid_val,get_item_ntm())
 
 shutil.copy(args.rom,args.randomized)
 with open(args.randomized,'r+b') as randomized:
@@ -1563,23 +1682,22 @@ with open(args.randomized,'r+b') as randomized:
 			else:
 				mon = get_mon_ncea()
 		else:
-			if eid in eids:
-				mon = eids[eid]
-			else:
-				mon = get_mon_ncea()
-				eids[eid] = mon
+			mon = get_mon_eid(eid)
 		if mon == None:
 			continue
 		bytes_to_write = mon.to_bytes(2,byteorder='little')
 		randomized.write(bytes_to_write)
 	for entry in item_offsets:
-		(addr,is_tm) = entry
+		(addr,is_tm,eid) = entry
 		randomized.seek(addr)
 		item = None
-		if is_tm:
-			item = get_item_tm()
+		if eid is None:
+			if is_tm:
+				item = get_item_tm()
+			else:
+				item = get_item_ntm()
 		else:
-			item = get_item_ntm()
+			item = get_item_eid(eid)
 		if item is None:
 			continue
 		bytes_to_write = item.to_bytes(2,byteorder='little')

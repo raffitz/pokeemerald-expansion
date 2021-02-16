@@ -40,7 +40,7 @@ for line in lines:
 				species[elements[1]] = forms_start + value
 			elif elements[3] == '-':
 				species[elements[1]] = forms_start - value
-		except:
+		except ValueError:
 			print('WARN unrecognised format for relative forms offset %s'%line)
 			pass
 	else:
@@ -49,7 +49,7 @@ for line in lines:
 			if elements[1] in species:
 				print('WARN %s %d %d'%(elements[1],species[elements[1]],value))
 			species[elements[1]] = value
-		except:
+		except ValueError:
 			pass
 
 items = {}
