@@ -2274,6 +2274,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 63,
         .evYield_HP        = 1,
+        .item1 = ITEM_SLOWBRONITE,
         #ifdef ITEM_EXPANSION
             .item2 = ITEM_LAGGING_TAIL,
         #endif
@@ -2304,6 +2305,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 75,
         .expYield = 172,
         .evYield_Defense   = 2,
+        .item1 = ITEM_SLOWBRONITE,
         .item2 = ITEM_KINGS_ROCK,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
