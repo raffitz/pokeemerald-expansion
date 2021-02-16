@@ -11,6 +11,27 @@ SlateportCity_Mart_EventScript_Clerk:: @ 820DC49
 	release
 	end
 
+SlateportCity_Mart_EventScript_LocalClerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart SlateportCity_Mart_LocalMart
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+	.align 2
+SlateportCity_Mart_LocalMart:
+	.2byte ITEM_NEST_BALL
+	.2byte ITEM_LUXURY_BALL
+	.2byte ITEM_DUSK_BALL
+	.2byte ITEM_ESCAPE_ROPE
+	.2byte ITEM_HARBOR_MAIL
+	.2byte ITEM_NONE
+	release
+	end
+
 SlateportCity_Mart_EventScript_BlackBelt:: @ 820DC76
 	msgbox SlateportCity_Mart_Text_SomeItemsOnlyAtMart, MSGBOX_NPC
 	end

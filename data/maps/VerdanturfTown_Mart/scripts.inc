@@ -11,6 +11,28 @@ VerdanturfTown_Mart_EventScript_Clerk:: @ 8202587
 	release
 	end
 
+VerdanturfTown_Mart_EventScript_LocalClerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart VerdanturfTown_Mart_LocalMart
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+	.align 2
+VerdanturfTown_Mart_LocalMart:
+	.2byte ITEM_NEST_BALL
+	.2byte ITEM_LOVE_BALL
+	.2byte ITEM_MOON_BALL
+	.2byte ITEM_X_SP_ATK
+	.2byte ITEM_FLUFFY_TAIL
+	.2byte ITEM_SHADOW_MAIL
+	.2byte ITEM_NONE
+	release
+	end
+
 VerdanturfTown_Mart_EventScript_Boy:: @ 82025BA
 	msgbox VerdanturfTown_Mart_Text_XSpecialIsCrucial, MSGBOX_NPC
 	end

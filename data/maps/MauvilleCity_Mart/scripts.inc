@@ -11,6 +11,32 @@ MauvilleCity_Mart_EventScript_Clerk:: @ 82110E6
 	release
 	end
 
+MauvilleCity_Mart_EventScript_LocalClerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart MauvilleCity_Mart_LocalMart
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+	.align 2
+MauvilleCity_Mart_LocalMart:
+	.2byte ITEM_QUICK_BALL
+	.2byte ITEM_FAST_BALL
+	.2byte ITEM_REPEAT_BALL
+	.2byte ITEM_X_SPEED
+	.2byte ITEM_X_ATTACK
+	.2byte ITEM_X_DEFENSE
+	.2byte ITEM_GUARD_SPEC
+	.2byte ITEM_DIRE_HIT
+	.2byte ITEM_X_ACCURACY
+	.2byte ITEM_WOOD_MAIL
+	.2byte ITEM_NONE
+	release
+	end
+
 MauvilleCity_Mart_EventScript_ExpertM:: @ 821111C
 	msgbox MauvilleCity_Mart_Text_ItemsToTemporarilyElevateStats, MSGBOX_NPC
 	end

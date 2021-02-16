@@ -11,6 +11,28 @@ MossdeepCity_Mart_EventScript_Clerk:: @ 82223C8
 	release
 	end
 
+MossdeepCity_Mart_EventScript_LocalClerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart MossdeepCity_Mart_LocalMart
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+	.align 2
+MossdeepCity_Mart_LocalMart:
+	.2byte ITEM_NET_BALL
+	.2byte ITEM_DIVE_BALL
+	.2byte ITEM_LURE_BALL
+	.2byte ITEM_X_ATTACK
+	.2byte ITEM_X_DEFENSE
+	.2byte ITEM_HARBOR_MAIL
+	.2byte ITEM_NONE
+	release
+	end
+
 MossdeepCity_Mart_EventScript_Woman:: @ 82223F6
 	msgbox MossdeepCity_Mart_Text_ReviveIsFantastic, MSGBOX_NPC
 	end

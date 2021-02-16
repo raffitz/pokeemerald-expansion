@@ -11,6 +11,30 @@ PetalburgCity_Mart_EventScript_Clerk:: @ 8207D69
 	release
 	end
 
+PetalburgCity_Mart_EventScript_LocalClerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart PetalburgCity_Mart_LocalMart
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+	.align 2
+PetalburgCity_Mart_LocalMart:
+	.2byte ITEM_NEST_BALL
+	.2byte ITEM_DUSK_BALL
+	.2byte ITEM_HEAL_BALL
+	.2byte ITEM_ESCAPE_ROPE
+	.2byte ITEM_X_SPEED
+	.2byte ITEM_X_ATTACK
+	.2byte ITEM_X_DEFENSE
+	.2byte ITEM_ORANGE_MAIL
+	.2byte ITEM_NONE
+	release
+	end
+
 PetalburgCity_Mart_EventScript_Woman:: @ 8207DD6
 	msgbox PetalburgCity_Mart_Text_WeakWillGrowStronger, MSGBOX_NPC
 	end
