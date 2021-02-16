@@ -207,6 +207,7 @@ void NewGameInitData(void)
     ResetTrainerHillResults();
     ResetContestLinkResults();
     gSaveBlock2Ptr->expShare = 1;
+    gSaveBlock2Ptr->autoRun = FALSE;
 }
 
 static void ResetMiniGamesResults(void)
