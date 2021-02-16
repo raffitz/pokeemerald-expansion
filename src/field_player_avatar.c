@@ -633,7 +633,23 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
     {
     // speed 2 is fast, same speed as running
-        PlayerGoSpeed2(direction);
+        if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_UNDERWATER) && (heldKeys & B_BUTTON || gSaveBlock2Ptr->autoRun) && FlagGet(FLAG_SYS_B_DASH)
+                && IsRunningDisallowed(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior) == 0)
+        {
+            if (heldKeys & B_BUTTON && gSaveBlock2Ptr->autoRun == TRUE)
+            {
+                PlayerGoSpeed2(direction);
+            }
+            else
+            {
+                PlayerGoSpeed4(direction);
+            }
+            return;
+        }
+        else
+        {
+            PlayerGoSpeed2(direction);
+        }
         return;
     }
 
@@ -1668,6 +1684,7 @@ static void Task_WaitStopSurfing(u8 taskId)
         gPlayerAvatar.preventStep = FALSE;
         ScriptContext2_Disable();
         DestroySprite(&gSprites[playerObjEvent->fieldEffectSpriteId]);
+        playerObjEvent->triggerGroundEffectsOnMove = TRUE;
         DestroyTask(taskId);
     }
 }
