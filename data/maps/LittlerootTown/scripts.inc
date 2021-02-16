@@ -950,8 +950,11 @@ LittlerootTown_EventScript_SetReceivedRunningShoes:: @ 81E8686
 
 LittlerootTown_EventScript_GiveRunningShoes:: @ 81E8693
 	msgbox LittlerootTown_Text_WearTheseRunningShoes, MSGBOX_DEFAULT
-	giveitem ITEM_MEGA_BRACELET
-	giveitem ITEM_EXP_SHARE
+	additem ITEM_MEGA_BRACELET
+	additem ITEM_Z_RING
+	additem ITEM_SHINY_CHARM
+	additem ITEM_OVAL_CHARM
+	additem ITEM_EXP_SHARE
 	playfanfare MUS_OBTAIN_ITEM
 	message LittlerootTown_Text_SwitchShoesWithRunningShoes
 	waitfanfare
@@ -990,7 +993,8 @@ LittlerootTown_Text_WearTheseRunningShoes: @ 81E87F0
 
 LittlerootTown_Text_SwitchShoesWithRunningShoes: @ 81E8925
 	.string "{PLAYER} switched shoes with the\n"
-	.string "RUNNING SHOES.$"
+	.string "RUNNING SHOES and stored the\p"
+	.string "rest of MOM's gifts in the bag.$"
 
 LittlerootTown_Text_ExplainRunningShoes: @ 81E894F
 	.string "MOM: {PLAYER}, good luck on your\n"
