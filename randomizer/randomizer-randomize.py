@@ -1568,13 +1568,15 @@ def get_mon_eid(eid_val):
 	global mon_eids
 	return mon_eids.setdefault(eid_val,get_mon_ncea())
 
-def get_item_eid(eid_val):
+def get_item_eid(eid_val,is_tm):
 	global mon_eids
 	global item_eids
 	global megas
 
 	if eid_val in item_eids:
 		return item_eids[eid_val]
+	if is_tm:
+		return item_eids.setdefault(eid_val,get_item_tm())
 	mon = get_mon_eid(eid_val)
 	if mon in megas:
 		(common,rare) = megas[mon]
@@ -1612,7 +1614,7 @@ with open(args.randomized,'r+b') as randomized:
 			else:
 				item = get_item_ntm()
 		else:
-			item = get_item_eid(eid)
+			item = get_item_eid(eid,is_tm)
 		if item is None:
 			continue
 		bytes_to_write = item.to_bytes(2,byteorder='little')
