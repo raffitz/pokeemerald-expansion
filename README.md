@@ -38,6 +38,14 @@ randomizer/randomizer-offsets.py randomizer/list.pickle randomizer/pokeemerald.t
 randomizer/randomizer-randomize.py randomizer/reference.pickle randomizer/offsets.pickle pokeemerald.gba randomizer/output.gba -seed RANDOM_SEED # reads the reference lookup table, and the fine-tuned offsets, and puts the randomized pokemon at those offsets.
 ```
 
+Once you have the various pickles and are absolutely sure you did not change and recompile the rom, you can create various versions with different seeds by just running the last command.
+
+```sh
+randomizer/randomizer-randomize.py randomizer/reference.pickle randomizer/offsets.pickle pokeemerald.gba randomizer/output_1.gba -seed SEED1
+randomizer/randomizer-randomize.py randomizer/reference.pickle randomizer/offsets.pickle pokeemerald.gba randomizer/output_2.gba -seed SEED2
+randomizer/randomizer-randomize.py randomizer/reference.pickle randomizer/offsets.pickle pokeemerald.gba randomizer/output_3.gba -seed SEED3
+```
+
 ## Simple mods implemented
 
  * [Highlight the nature boosted and bucked stats (DizzyEgg)](https://www.pokecommunity.com/showpost.php?p=10024409&postcount=21)
