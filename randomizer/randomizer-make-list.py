@@ -1411,7 +1411,7 @@ foe_labels['sParty_Zander'] = [species['SPECIES_HARIYAMA']]
 
 item_labels = {}
 
-item_labels['gNewGamePCItems'] = ('pc',items['ITEM_POTION'])
+item_labels['gNewGamePCItems'] = ('pc',items['ITEM_POTION'],False,None)
 
 item_labels['RustboroCity_DevonCorp_3F_EventScript_GiveExpShare'] = ('giveitem',items['ITEM_MASTER_BALL'],False,None)
 item_labels['PlayersHouse_1F_EventScript_TryGiveAmuletCoin'] = ('giveitem',items['ITEM_AMULET_COIN'],False,None)
