@@ -11,12 +11,14 @@ parser.add_argument('output',type=argparse.FileType('wb'),help='The output offse
 
 args = parser.parse_args()
 
-(mon_labels,trade_labels,foe_item_labels,foe_labels) = pickle.load(args.labels)
+(mon_labels,trade_labels,foe_item_labels,foe_labels,item_labels,hidden_item_labels,max_id) = pickle.load(args.labels)
 
 mon_addresses = set()
 trade_addresses = set()
 foe_item_addresses = set()
 foe_addresses = set()
+item_addresses = set()
+hidden_item_addresses = set()
 
 # Mons Format: (Address, Catch Em All, exclusive ID)
 mons = []
@@ -284,15 +286,15 @@ def process_mon(address,data,label):
 				else:
 					# print('DEBG \t\tAdding entry')
 					mons.append(entry)
+			else:
+				print('WARN unable to match entry type %s %s'%(entry_type,label))
 
-trade_counter = 0
-trade_offset = 100
+id_counter = max_id
 
 def process_trade(address,data,label):
 	global mons
 	global items
-	global trade_counter
-	global trade_offset
+	global id_counter
 	for entry in data:
 		args.binary.seek(address)
 		(pkmn,item,requested) = entry
@@ -318,28 +320,24 @@ def process_trade(address,data,label):
 		if species_i != pkmn:
 			print('WARN in-game-trade pkmn mismatch %d != %d %s'%(pkmn,species_i,label))
 		else:
-			mons.append((address + 0x0c,False,trade_offset + trade_counter))
+			mons.append((address + 0x0c,False,id_counter))
 		hitem_i = int.from_bytes(hitem, byteorder='little', signed=False)
 		if hitem_i != item:
 			print('WARN in-game-trade held item mismatch %d != %d %s'%(item,hitem_i,label))
 		else:
-			items.append((address + 0x28,False,trade_offset + trade_counter))
+			items.append((address + 0x28,False,id_counter))
 		tradereq_i = int.from_bytes(tradereq, byteorder='little', signed=False)
 		if tradereq_i != requested:
 			print('WARN in-game-trade request mismatch %d != %d %s'%(requested,tradereq_i,label))
 		else:
 			mons.append((address + 0x38,False,None))
 		address += 0x3c
-		trade_counter += 1
-
-foe_counter = 0
-foe_offset = 150
+		id_counter += 1
 
 def process_foe_item(address,data,label):
 	global mons
 	global items
-	global foe_counter
-	global foe_offset
+	global id_counter
 	for entry in data:
 		args.binary.seek(address)
 		(pkmn,item) = entry
@@ -354,20 +352,19 @@ def process_foe_item(address,data,label):
 		if species_i != pkmn:
 			print('WARN foe item pkmn mismatch %d != %d %s'%(pkmn,species_i,label))
 		else:
-			mons.append((address + 0x0c,False,foe_offset + foe_counter))
+			mons.append((address + 0x0c,False,id_counter))
 		hitem_i = int.from_bytes(hitem, byteorder='little', signed=False)
 		if hitem_i != item:
 			print('WARN foe item item mismatch %d != %d %s'%(item,hitem_i,label))
 		else:
-			items.append((address + 0x28,False,foe_offset + foe_counter))
+			items.append((address + 0x28,False,id_counter))
 		address += 8
-		foe_counter += 1
+		id_counter += 1
 
 def process_foe(address,data,label):
 	global mons
 	global items
-	global foe_counter
-	global foe_offset
+	global id_counter
 	for pkmn in data:
 		args.binary.seek(address)
 		# struct defined in include/data.h
@@ -380,9 +377,85 @@ def process_foe(address,data,label):
 		if species_i != pkmn:
 			print('WARN foe pkmn mismatch %d != %d %s'%(pkmn,species_i,label))
 		else:
-			mons.append((address + 0x0c,False,foe_offset + foe_counter))
+			mons.append((address + 0x0c,False,id_counter))
 		address += 8
-		foe_counter += 1
+		id_counter += 1
+
+def process_item(address,data,label):
+	global mons
+	global items
+	global id_counter
+	(entry_type,item,is_tm,eid) = data
+	if entry_type == 'pc':
+		args.binary.seek(address)
+		item_bin = args.binary.read(2)
+		item_read = int.from_bytes(item_bin, byteorder='little', signed=False)
+		if item_read != item:
+			print('WARN pc item mismatch %d != %d %s'%(item_read,item,label))
+		else:
+			items.append((address,is_tm,eid))
+	elif entry_type == 'giveitem' or entry_type == 'finditem':
+		# giveitem and finditem are actually a couple of setorcopyvars and calls to functions
+		# 0x1a 0xVADD 0xITEM
+		start = address
+		limit = address + 128
+		entry = None
+		mismatch = None
+		while entry == None and start < limit:
+			args.binary.seek(start)
+			b = args.binary.read(1)
+			if int.from_bytes(b,byteorder='little',signed=False) == 0x1a:
+				_vaddr = args.binary.read(2)
+				item_bin = args.binary.read(2)
+				item_read = int.from_bytes(item_bin, byteorder='little', signed=False)
+				if item == item_read:
+					entry = (start + 3,is_tm,eid)
+				else:
+					mismatch = item_read
+			start += 1
+		if entry is None:
+			if mismatch is not None:
+				print('WARN script cmd %s item mismatch %d != %d %s'%(entry_type,item,mismatch,label))
+			else:
+				print('WARN script cmd %s did not find cmd byte 0x1a within range %s'%(entry_type,label))
+		else:
+			# print('DEBG \t\tAdding entry')
+			items.append(entry)
+	else:
+		print('WARN unable to match entry type %s %s'%(entry_type,label))
+		
+
+STRUCT_SIZE = 12
+
+def process_hidden_item(address,data,label):
+	global mons
+	global items
+	global id_counter
+	for entry in data:
+		(entry_type,item,is_tm) = entry
+		if entry_type == 'ignore':
+			address += STRUCT_SIZE
+		elif entry_type == 'bg_hidden_item_event':
+			args.binary.seek(address)
+			_x = args.binary.read(2) #		0	2
+			_y = args.binary.read(2) #		2	2
+			_elv = args.binary.read(1) #		4	1
+			_knd = args.binary.read(1) #		5	1
+			_noise = args.binary.read(2) #		6	2
+			item_bin = args.binary.read(2) #	8	2
+			# flag					a	1
+			# zero					b	1
+			# inc _num_signs			c	2?
+			# total size: 14			e
+			item_read = int.from_bytes(item_bin, byteorder='little', signed=False)
+			if item == item_read:
+				items.append((address + 8,is_tm,None))
+			else:
+				print('WARN hidden item mismatch %d != %d %s'%(item,item_read,label))
+			address += STRUCT_SIZE
+		else:
+			print('WARN unable to match entry type %s %s'%(entry_type,label))
+			address += STRUCT_SIZE
 
 
 lines = args.table.readlines()
@@ -428,7 +501,24 @@ for line in lines:
 			foe_addresses.add(elements[-1])
 		except ValueError:
 			pass
-	# TODO other labels (items)
+	if elements[-1] in item_labels:
+		try:
+			value = int(elements[0],16) - 0x8000000
+			# print('DEBG \taddress = %d'%value)
+			data = item_labels[elements[-1]]
+			process_item(value,data,elements[-1])
+			item_addresses.add(elements[-1])
+		except ValueError:
+			pass
+	if elements[-1] in hidden_item_labels:
+		try:
+			value = int(elements[0],16) - 0x8000000
+			# print('DEBG \taddress = %d'%value)
+			data = hidden_item_labels[elements[-1]]
+			process_hidden_item(value,data,elements[-1])
+			hidden_item_addresses.add(elements[-1])
+		except ValueError:
+			pass
 
 missing_mons = mon_addresses.difference(set(mon_labels.keys()))
 for label in missing_mons:
@@ -437,6 +527,22 @@ for label in missing_mons:
 missing_trades = trade_addresses.difference(set(trade_labels.keys()))
 for label in missing_trades:
 	print('WARN missing trade label %s'%label)
+
+missing_foe_item = foe_item_addresses.difference(set(foe_item_labels.keys()))
+for label in missing_foe_item:
+	print('WARN missing foe item label %s'%label)
+
+missing_foe= foe_addresses.difference(set(foe_labels.keys()))
+for label in missing_foe:
+	print('WARN missing foe label %s'%label)
+
+missing_item = item_addresses.difference(set(item_labels.keys()))
+for label in missing_item:
+	print('WARN missing item label %s'%label)
+
+missing_hidden_item = hidden_item_addresses.difference(set(hidden_item_labels.keys()))
+for label in missing_hidden_item:
+	print('WARN missing hidden item label %s'%label)
 
 pickle.dump((mons,items),args.output)
 args.output.close()

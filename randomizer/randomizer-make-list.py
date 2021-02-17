@@ -1409,5 +1409,633 @@ foe_labels['sParty_Yasu'] = [species['SPECIES_NINJASK']]
 foe_labels['sParty_Yuji'] = [species['SPECIES_MAKUHITA'],species['SPECIES_MACHOKE']]
 foe_labels['sParty_Zander'] = [species['SPECIES_HARIYAMA']]
 
-pickle.dump((mon_labels,trade_labels,foe_item_labels,foe_labels),args.output)
+item_labels = {}
+
+item_labels['gNewGamePCItems'] = ('pc',items['ITEM_POTION'])
+
+item_labels['RustboroCity_DevonCorp_3F_EventScript_GiveExpShare'] = ('giveitem',items['ITEM_MASTER_BALL'],False,None)
+item_labels['PlayersHouse_1F_EventScript_TryGiveAmuletCoin'] = ('giveitem',items['ITEM_AMULET_COIN'],False,None)
+item_labels['OldaleTown_EventScript_ExplainPokemonMart'] = ('giveitem',items['ITEM_POTION'],False,None)
+item_labels['Route104_EventScript_Boy2'] = ('giveitem',items['ITEM_TM09'],True,None)
+item_labels['Route104_EventScript_WhiteHerbFlorist'] = ('giveitem',items['ITEM_WHITE_HERB'],False,None)
+item_labels['Route104_EventScript_ExpertF'] = ('giveitem',items['ITEM_CHESTO_BERRY'],False,None)
+item_labels['PetalburgWoods_EventScript_DevonResearcherPostBattle'] = ('giveitem',items['ITEM_GREAT_BALL'],False,None)
+item_labels['PetalburgWoods_EventScript_Girl'] = ('giveitem',items['ITEM_MIRACLE_SEED'],False,None)
+item_labels['RustboroCity_Flat2_2F_EventScript_NinjaBoy'] = ('giveitem',items['ITEM_PREMIER_BALL'],False,None)
+item_labels['RustboroCity_EventScript_ReturnGoods'] = ('giveitem',items['ITEM_GREAT_BALL'],False,None)
+item_labels['Route114_FossilManiacsHouse_EventScript_FossilManiacsBrother'] = ('giveitem',items['ITEM_TM28'],True,None)
+item_labels['Route114_EventScript_RoarGentleman'] = ('giveitem',items['ITEM_TM05'],True,None)
+item_labels['FallarborTown_CozmosHouse_EventScript_PlayerHasMeteorite'] = ('giveitem',items['ITEM_TM27'],True,None)
+item_labels['Route111_WinstrateFamilysHouse_EventScript_Victoria'] = ('giveitem',items['ITEM_MACHO_BRACE'],False,None)
+item_labels['LavaridgeTown_HerbShop_EventScript_OldMan'] = ('giveitem',items['ITEM_CHARCOAL'],False,None)
+item_labels['VerdanturfTown_BattleTentLobby_EventScript_AttractGiver'] = ('giveitem',items['ITEM_TM45'],True,None)
+item_labels['Route116_EventScript_GiveRepeatBall'] = ('giveitem',items['ITEM_REPEAT_BALL'],False,None)
+item_labels['GraniteCave_StevensRoom_EventScript_Steven'] = ('giveitem',items['ITEM_TM47'],True,None)
+item_labels['DewfordTown_Hall_EventScript_SludgeBombMan'] = ('giveitem',items['ITEM_TM36'],True,None)
+item_labels['DewfordTown_House2_EventScript_Man'] = ('giveitem',items['ITEM_SILK_SCARF'],False,None)
+item_labels['Route109_EventScript_SoftSandGirl'] = ('giveitem',items['ITEM_SOFT_SAND'],False,None)
+item_labels['Route109_SeashoreHouse_EventScript_DefeatedTrainers'] = ('giveitem',items['ITEM_SODA_POP'],False,None)
+item_labels['SlateportCity_BattleTentLobby_EventScript_TormentGiver'] = ('giveitem',items['ITEM_TM41'],True,None)
+item_labels['SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGrunt'] = ('giveitem',items['ITEM_TM46'],True,None)
+item_labels['PacifidlogTown_House2_EventScript_GiveReturn'] = ('giveitem',items['ITEM_TM27'],True,None)
+item_labels['PacifidlogTown_House2_EventScript_GiveFrustration'] = ('giveitem',items['ITEM_TM21'],True,None)
+item_labels['MossdeepCity_EventScript_KingsRockBoy'] = ('giveitem',items['ITEM_KINGS_ROCK'],False,None)
+item_labels['ShoalCave_LowTideLowerRoom_EventScript_BlackBelt'] = ('giveitem',items['ITEM_FOCUS_BAND'],False,None)
+item_labels['SootopolisCity_House1_EventScript_BrickBreakBlackBelt'] = ('giveitem',items['ITEM_TM31'],True,None)
+item_labels['LilycoveCity_House2_EventScript_FatMan'] = ('giveitem',items['ITEM_TM44'],True,None)
+item_labels['Route123_EventScript_GigaDrainGirl'] = ('giveitem',items['ITEM_TM19'],True,None)
+item_labels['FortreeCity_House2_EventScript_HiddenPowerGiver'] = ('giveitem',items['ITEM_TM10'],True,None)
+item_labels['FortreeCity_House4_EventScript_WingullReturned'] = ('giveitem',items['ITEM_MENTAL_HERB'],False,None)
+item_labels['MtPyre_1F_EventScript_CleanseTagWoman'] = ('giveitem',items['ITEM_CLEANSE_TAG'],False,None)
+
+item_id = encounter_id
+
+# Gym Badge TMs:
+## Rock Tomb TM39 0x0802
+item_labels['RustboroCity_Gym_EventScript_GiveRockTomb'] = ('giveitem',items['ITEM_TM39'],True,item_id)
+item_id+=1
+## Bulk Up TM08 0xe901
+item_labels['DewfordTown_Gym_EventScript_GiveBulkUp'] = ('giveitem',items['ITEM_TM08'],True,item_id)
+item_labels['DewfordTown_Gym_EventScript_GiveBulkUp2'] = ('giveitem',items['ITEM_TM08'],True,item_id)
+item_id+=1
+## Shockwave TM34 0x0302
+item_labels['MauvilleCity_Gym_EventScript_GiveShockWave'] = ('giveitem',items['ITEM_TM34'],True,item_id)
+item_labels['MauvilleCity_Gym_EventScript_GiveShockWave2'] = ('giveitem',items['ITEM_TM34'],True,item_id)
+item_id+=1
+## Overheat TM50 0x1302
+item_labels['LavaridgeTown_Gym_1F_EventScript_GiveOverheat'] = ('giveitem',items['ITEM_TM50'],True,item_id)
+item_labels['LavaridgeTown_Gym_1F_EventScript_GiveOverheat2'] = ('giveitem',items['ITEM_TM50'],True,item_id)
+item_id+=1
+## Facade TM42 0x0b02
+item_labels['PetalburgCity_Gym_EventScript_GiveFacade'] = ('giveitem',items['ITEM_TM42'],True,item_id)
+item_id+=1
+## Aerial Ace TM40 0x0902
+item_labels['FortreeCity_Gym_EventScript_GiveAerialAce'] = ('giveitem',items['ITEM_TM40'],True,item_id)
+item_labels['FortreeCity_Gym_EventScript_GiveAerialAce2'] = ('giveitem',items['ITEM_TM40'],True,item_id)
+item_id+=1
+## Calm Mind TM04 0xeitem_id
+item_labels['MossdeepCity_Gym_EventScript_GiveCalmMind'] = ('giveitem',items['ITEM_TM04'],True,item_id)
+item_labels['MossdeepCity_Gym_EventScript_GiveCalmMind2'] = ('giveitem',items['ITEM_TM04'],True,item_id)
+item_id+=1
+## Water Pulse TM03 0xe401
+item_labels['SootopolisCity_Gym_1F_EventScript_GiveWaterPulse'] = ('giveitem',items['ITEM_TM03'],True,item_id)
+item_labels['SootopolisCity_Gym_1F_EventScript_GiveWaterPulse2'] = ('giveitem',items['ITEM_TM03'],True,item_id)
+item_id+=1
+
+# Scattered Items:
+
+item_labels['Route102_EventScript_ItemPotion'] = ('finditem',items['ITEM_POTION'],False,None)
+item_labels['Route103_EventScript_ItemGuardSpec'] = ('finditem',items['ITEM_GUARD_SPEC'],False,None)
+item_labels['Route103_EventScript_ItemPPUp'] = ('finditem',items['ITEM_PP_UP'],False,None)
+item_labels['Route104_EventScript_ItemPPUp'] = ('finditem',items['ITEM_PP_UP'],False,None)
+item_labels['Route104_EventScript_ItemPokeBall'] = ('finditem',items['ITEM_POKE_BALL'],False,None)
+item_labels['Route104_EventScript_ItemXAccuracy'] = ('finditem',items['ITEM_X_ACCURACY'],False,None)
+item_labels['Route104_EventScript_ItemPotion'] = ('finditem',items['ITEM_POTION'],False,None)
+item_labels['Route105_EventScript_ItemIron'] = ('finditem',items['ITEM_IRON'],False,None)
+item_labels['Route106_EventScript_ItemProtein'] = ('finditem',items['ITEM_PROTEIN'],False,None)
+item_labels['Route108_EventScript_ItemStarPiece'] = ('finditem',items['ITEM_STAR_PIECE'],False,None)
+item_labels['Route109_EventScript_ItemPPUp'] = ('finditem',items['ITEM_PP_UP'],False,None)
+item_labels['Route109_EventScript_ItemPotion'] = ('finditem',items['ITEM_POTION'],False,None)
+item_labels['Route110_EventScript_ItemRareCandy'] = ('finditem',items['ITEM_RARE_CANDY'],False,None)
+item_labels['Route110_EventScript_ItemDireHit'] = ('finditem',items['ITEM_DIRE_HIT'],False,None)
+item_labels['Route110_EventScript_ItemElixir'] = ('finditem',items['ITEM_ELIXIR'],False,None)
+item_labels['Route111_EventScript_ItemTM37'] = ('finditem',items['ITEM_TM37'],True,None)
+item_labels['Route111_EventScript_ItemStardust'] = ('finditem',items['ITEM_STARDUST'],False,None)
+item_labels['Route111_EventScript_ItemHPUp'] = ('finditem',items['ITEM_HP_UP'],False,None)
+item_labels['Route111_EventScript_ItemElixir'] = ('finditem',items['ITEM_ELIXIR'],False,None)
+item_labels['Route112_EventScript_ItemNugget'] = ('finditem',items['ITEM_NUGGET'],False,None)
+item_labels['Route113_EventScript_ItemMaxEther'] = ('finditem',items['ITEM_MAX_ETHER'],False,None)
+item_labels['Route113_EventScript_ItemSuperRepel'] = ('finditem',items['ITEM_SUPER_REPEL'],False,None)
+item_labels['Route113_EventScript_ItemHyperPotion'] = ('finditem',items['ITEM_SUPER_POTION'],False,None)
+item_labels['Route114_EventScript_ItemRareCandy'] = ('finditem',items['ITEM_RARE_CANDY'],False,None)
+item_labels['Route114_EventScript_ItemProtein'] = ('finditem',items['ITEM_PROTEIN'],False,None)
+item_labels['Route114_EventScript_ItemEnergyPowder'] = ('finditem',items['ITEM_ENERGY_POWDER'],False,None)
+item_labels['Route115_EventScript_ItemSuperPotion'] = ('finditem',items['ITEM_SUPER_POTION'],False,None)
+item_labels['Route115_EventScript_ItemTM01'] = ('finditem',items['ITEM_TM01'],True,None)
+item_labels['Route115_EventScript_ItemIron'] = ('finditem',items['ITEM_IRON'],False,None)
+item_labels['Route115_EventScript_ItemGreatBall'] = ('finditem',items['ITEM_GREAT_BALL'],False,None)
+item_labels['Route115_EventScript_ItemHealPowder'] = ('finditem',items['ITEM_HEAL_POWDER'],False,None)
+item_labels['Route115_EventScript_ItemPPUp'] = ('finditem',items['ITEM_PP_UP'],False,None)
+item_labels['Route116_EventScript_ItemXSpecial'] = ('finditem',items['ITEM_X_SP_ATK'],False,None)
+item_labels['Route116_EventScript_ItemEther'] = ('finditem',items['ITEM_ETHER'],False,None)
+item_labels['Route116_EventScript_ItemRepel'] = ('finditem',items['ITEM_REPEL'],False,None)
+item_labels['Route116_EventScript_ItemHPUp'] = ('finditem',items['ITEM_HP_UP'],False,None)
+item_labels['Route116_EventScript_ItemPotion'] = ('finditem',items['ITEM_POTION'],False,None)
+item_labels['Route117_EventScript_ItemGreatBall'] = ('finditem',items['ITEM_GREAT_BALL'],False,None)
+item_labels['Route117_EventScript_ItemRevive'] = ('finditem',items['ITEM_REVIVE'],False,None)
+item_labels['Route118_EventScript_ItemHyperPotion'] = ('finditem',items['ITEM_HYPER_POTION'],False,None)
+item_labels['Route119_EventScript_ItemSuperRepel'] = ('finditem',items['ITEM_SUPER_REPEL'],False,None)
+item_labels['Route119_EventScript_ItemZinc'] = ('finditem',items['ITEM_ZINC'],False,None)
+item_labels['Route119_EventScript_ItemElixir'] = ('finditem',items['ITEM_ELIXIR'],False,None)
+item_labels['Route119_EventScript_ItemLeafStone'] = ('finditem',items['ITEM_LEAF_STONE'],False,None)
+item_labels['Route119_EventScript_ItemRareCandy'] = ('finditem',items['ITEM_RARE_CANDY'],False,None)
+item_labels['Route119_EventScript_ItemHyperPotion'] = ('finditem',items['ITEM_HYPER_POTION'],False,None)
+item_labels['Route119_EventScript_ItemHyperPotion2'] = ('finditem',items['ITEM_HYPER_POTION'],False,None)
+item_labels['Route119_EventScript_ItemElixir2'] = ('finditem',items['ITEM_ELIXIR'],False,None)
+item_labels['Route120_EventScript_ItemNugget'] = ('finditem',items['ITEM_NUGGET'],False,None)
+item_labels['Route120_EventScript_ItemFullHeal'] = ('finditem',items['ITEM_FULL_HEAL'],False,None)
+item_labels['Route120_EventScript_ItemHyperPotion'] = ('finditem',items['ITEM_HYPER_POTION'],False,None)
+item_labels['Route120_EventScript_ItemNestBall'] = ('finditem',items['ITEM_NEST_BALL'],False,None)
+item_labels['Route120_EventScript_ItemRevive'] = ('finditem',items['ITEM_REVIVE'],False,None)
+item_labels['Route121_EventScript_ItemCarbos'] = ('finditem',items['ITEM_CARBOS'],False,None)
+item_labels['Route121_EventScript_ItemRevive'] = ('finditem',items['ITEM_REVIVE'],False,None)
+item_labels['Route121_EventScript_ItemZinc'] = ('finditem',items['ITEM_ZINC'],False,None)
+item_labels['Route123_EventScript_ItemCalcium'] = ('finditem',items['ITEM_CALCIUM'],False,None)
+item_labels['Route123_EventScript_ItemUltraBall'] = ('finditem',items['ITEM_ULTRA_BALL'],False,None)
+item_labels['Route123_EventScript_ItemElixir'] = ('finditem',items['ITEM_ELIXIR'],False,None)
+item_labels['Route123_EventScript_ItemPPUp'] = ('finditem',items['ITEM_PP_UP'],False,None)
+item_labels['Route123_EventScript_ItemRevivalHerb'] = ('finditem',items['ITEM_REVIVAL_HERB'],False,None)
+item_labels['Route124_EventScript_ItemRedShard'] = ('finditem',items['ITEM_RED_SHARD'],False,None)
+item_labels['Route124_EventScript_ItemBlueShard'] = ('finditem',items['ITEM_BLUE_SHARD'],False,None)
+item_labels['Route124_EventScript_ItemYellowShard'] = ('finditem',items['ITEM_YELLOW_SHARD'],False,None)
+item_labels['Route125_EventScript_ItemBigPearl'] = ('finditem',items['ITEM_BIG_PEARL'],False,None)
+item_labels['Route126_EventScript_ItemGreenShard'] = ('finditem',items['ITEM_GREEN_SHARD'],False,None)
+item_labels['Route127_EventScript_ItemZinc'] = ('finditem',items['ITEM_ZINC'],False,None)
+item_labels['Route127_EventScript_ItemCarbos'] = ('finditem',items['ITEM_CARBOS'],False,None)
+item_labels['Route127_EventScript_ItemRareCandy'] = ('finditem',items['ITEM_RARE_CANDY'],False,None)
+item_labels['Route132_EventScript_ItemRareCandy'] = ('finditem',items['ITEM_RARE_CANDY'],False,None)
+item_labels['Route132_EventScript_ItemProtein'] = ('finditem',items['ITEM_PROTEIN'],False,None)
+item_labels['Route133_EventScript_ItemBigPearl'] = ('finditem',items['ITEM_BIG_PEARL'],False,None)
+item_labels['Route133_EventScript_ItemStarPiece'] = ('finditem',items['ITEM_STAR_PIECE'],False,None)
+item_labels['Route133_EventScript_ItemMaxRevive'] = ('finditem',items['ITEM_MAX_REVIVE'],False,None)
+item_labels['Route134_EventScript_ItemCarbos'] = ('finditem',items['ITEM_CARBOS'],False,None)
+item_labels['Route134_EventScript_ItemStarPiece'] = ('finditem',items['ITEM_STAR_PIECE'],False,None)
+item_labels['PetalburgCity_EventScript_ItemMaxRevive'] = ('finditem',items['ITEM_MAX_REVIVE'],False,None)
+item_labels['PetalburgCity_EventScript_ItemEther'] = ('finditem',items['ITEM_ETHER'],False,None)
+item_labels['MauvilleCity_EventScript_ItemXSpeed'] = ('finditem',items['ITEM_X_SPEED'],False,None)
+item_labels['RustboroCity_EventScript_ItemXDefend'] = ('finditem',items['ITEM_X_DEFENSE'],False,None)
+item_labels['LilycoveCity_EventScript_ItemMaxRepel'] = ('finditem',items['ITEM_MAX_REPEL'],False,None)
+item_labels['MossdeepCity_EventScript_ItemNetBall'] = ('finditem',items['ITEM_NET_BALL'],False,None)
+item_labels['PetalburgWoods_EventScript_ItemXAttack'] = ('finditem',items['ITEM_X_ATTACK'],False,None)
+item_labels['PetalburgWoods_EventScript_ItemGreatBall'] = ('finditem',items['ITEM_GREAT_BALL'],False,None)
+item_labels['PetalburgWoods_EventScript_ItemEther'] = ('finditem',items['ITEM_ETHER'],False,None)
+item_labels['PetalburgWoods_EventScript_ItemParalyzeHeal'] = ('finditem',items['ITEM_PARALYZE_HEAL'],False,None)
+item_labels['RusturfTunnel_EventScript_ItemPokeBall'] = ('finditem',items['ITEM_POKE_BALL'],False,None)
+item_labels['RusturfTunnel_EventScript_ItemMaxEther'] = ('finditem',items['ITEM_MAX_ETHER'],False,None)
+item_labels['GraniteCave_1F_EventScript_ItemEscapeRope'] = ('finditem',items['ITEM_ESCAPE_ROPE'],False,None)
+item_labels['GraniteCave_B1F_EventScript_ItemPokeBall'] = ('finditem',items['ITEM_POKE_BALL'],False,None)
+item_labels['GraniteCave_B2F_EventScript_ItemRepel'] = ('finditem',items['ITEM_REPEL'],False,None)
+item_labels['GraniteCave_B2F_EventScript_ItemRareCandy'] = ('finditem',items['ITEM_RARE_CANDY'],False,None)
+item_labels['JaggedPass_EventScript_ItemBurnHeal'] = ('finditem',items['ITEM_BURN_HEAL'],False,None)
+item_labels['FieryPath_EventScript_ItemFireStone'] = ('finditem',items['ITEM_FIRE_STONE'],False,None)
+item_labels['FieryPath_EventScript_ItemTM06'] = ('finditem',items['ITEM_TM06'],True,None)
+item_labels['MeteorFalls_1F_1R_EventScript_ItemTM23'] = ('finditem',items['ITEM_TM23'],True,None)
+item_labels['MeteorFalls_1F_1R_EventScript_ItemFullHeal'] = ('finditem',items['ITEM_FULL_HEAL'],False,None)
+item_labels['MeteorFalls_1F_1R_EventScript_ItemMoonStone'] = ('finditem',items['ITEM_MOON_STONE'],False,None)
+item_labels['MeteorFalls_1F_1R_EventScript_ItemPPUP'] = ('finditem',items['ITEM_PP_UP'],False,None)
+item_labels['MeteorFalls_B1F_2R_EventScript_ItemTM02'] = ('finditem',items['ITEM_TM02'],True,None)
+item_labels['NewMauville_Inside_EventScript_ItemUltraBall'] = ('finditem',items['ITEM_ULTRA_BALL'],False,None)
+item_labels['NewMauville_Inside_EventScript_ItemEscapeRope'] = ('finditem',items['ITEM_ESCAPE_ROPE'],False,None)
+item_labels['NewMauville_Inside_EventScript_ItemThunderStone'] = ('finditem',items['ITEM_THUNDER_STONE'],False,None)
+item_labels['NewMauville_Inside_EventScript_ItemFullHeal'] = ('finditem',items['ITEM_FULL_HEAL'],False,None)
+item_labels['NewMauville_Inside_EventScript_ItemParalyzeHeal'] = ('finditem',items['ITEM_PARALYZE_HEAL'],False,None)
+item_labels['AbandonedShip_Rooms_1F_EventScript_ItemHarborMail'] = ('finditem',items['ITEM_HARBOR_MAIL'],False,None)
+item_labels['AbandonedShip_Rooms_B1F_EventScript_ItemEscapeRope'] = ('finditem',items['ITEM_ESCAPE_ROPE'],False,None)
+item_labels['AbandonedShip_Rooms2_B1F_EventScript_ItemDiveBall'] = ('finditem',items['ITEM_DIVE_BALL'],False,None)
+item_labels['AbandonedShip_Room_B1F_EventScript_ItemTM13'] = ('finditem',items['ITEM_TM13'],True,None)
+item_labels['AbandonedShip_Rooms2_1F_EventScript_ItemRevive'] = ('finditem',items['ITEM_REVIVE'],False,None)
+item_labels['AbandonedShip_HiddenFloorRooms_EventScript_ItemLuxuryBall'] = ('finditem',items['ITEM_LUXURY_BALL'],False,None)
+item_labels['AbandonedShip_HiddenFloorRooms_EventScript_ItemWaterStone'] = ('finditem',items['ITEM_WATER_STONE'],False,None)
+item_labels['AbandonedShip_HiddenFloorRooms_EventScript_ItemTM18'] = ('finditem',items['ITEM_TM18'],True,None)
+item_labels['ScorchedSlab_EventScript_ItemTM11'] = ('finditem',items['ITEM_TM11'],True,None)
+item_labels['SafariZone_Northwest_EventScript_ItemTM22'] = ('finditem',items['ITEM_TM22'],True,None)
+item_labels['SafariZone_North_EventScript_ItemCalcium'] = ('finditem',items['ITEM_CALCIUM'],False,None)
+item_labels['SafariZone_Southwest_EventScript_ItemMaxRevive'] = ('finditem',items['ITEM_MAX_REVIVE'],False,None)
+item_labels['SafariZone_Northeast_EventScript_ItemNugget'] = ('finditem',items['ITEM_NUGGET'],False,None)
+item_labels['SafariZone_Southeast_EventScript_ItemBigPearl'] = ('finditem',items['ITEM_BIG_PEARL'],False,None)
+item_labels['MtPyre_2F_EventScript_ItemUltraBall'] = ('finditem',items['ITEM_ULTRA_BALL'],False,None)
+item_labels['MtPyre_3F_EventScript_ItemSuperRepel'] = ('finditem',items['ITEM_SUPER_REPEL'],False,None)
+item_labels['MtPyre_4F_EventScript_ItemSeaIncense'] = ('finditem',items['ITEM_SEA_INCENSE'],False,None)
+item_labels['MtPyre_5F_EventScript_ItemLaxIncense'] = ('finditem',items['ITEM_LAX_INCENSE'],False,None)
+item_labels['MtPyre_6F_EventScript_ItemTM30'] = ('finditem',items['ITEM_TM30'],True,None)
+item_labels['MtPyre_Exterior_EventScript_ItemMaxPotion'] = ('finditem',items['ITEM_MAX_POTION'],False,None)
+item_labels['MtPyre_Exterior_EventScript_ItemTM48'] = ('finditem',items['ITEM_TM48'],True,None)
+item_labels['AquaHideout_B1F_EventScript_ItemMasterBall'] = ('finditem',items['ITEM_MASTER_BALL'],False,None)
+item_labels['AquaHideout_B1F_EventScript_ItemNugget'] = ('finditem',items['ITEM_NUGGET'],False,None)
+item_labels['AquaHideout_B1F_EventScript_ItemMaxElixir'] = ('finditem',items['ITEM_MAX_ELIXIR'],False,None)
+item_labels['AquaHideout_B2F_EventScript_ItemNestBall'] = ('finditem',items['ITEM_NEST_BALL'],False,None)
+item_labels['AquaHideout_B2F_EventScript_ItemMasterBall'] = ('finditem',items['ITEM_MASTER_BALL'],False,None)
+item_labels['Route119_EventScript_ItemNugget'] = ('finditem',items['ITEM_NUGGET'],False,None)
+item_labels['Route119_EventScript_ItemMaxElixir'] = ('finditem',items['ITEM_MAX_ELIXIR'],False,None)
+item_labels['Route119_EventScript_ItemNestBall'] = ('finditem',items['ITEM_NEST_BALL'],False,None)
+item_labels['ShoalCave_LowTideEntranceRoom_EventScript_ItemBigPearl'] = ('finditem',items['ITEM_BIG_PEARL'],False,None)
+item_labels['ShoalCave_LowTideInnerRoom_EventScript_ItemRareCandy'] = ('finditem',items['ITEM_RARE_CANDY'],False,None)
+item_labels['ShoalCave_LowTideStairsRoom_EventScript_ItemIceHeal'] = ('finditem',items['ITEM_ICE_HEAL'],False,None)
+item_labels['ShoalCave_LowTideIceRoom_EventScript_ItemTM07'] = ('finditem',items['ITEM_TM07'],True,None)
+item_labels['ShoalCave_LowTideIceRoom_EventScript_ItemNeverMeltIce'] = ('finditem',items['ITEM_NEVER_MELT_ICE'],False,None)
+item_labels['SeafloorCavern_Room9_EventScript_ItemTM26'] = ('finditem',items['ITEM_TM26'],True,None)
+item_labels['Route110_TrickHousePuzzle1_EventScript_ItemOrangeMail'] = ('finditem',items['ITEM_ORANGE_MAIL'],False,None)
+item_labels['Route110_TrickHousePuzzle2_EventScript_ItemHarborMail'] = ('finditem',items['ITEM_HARBOR_MAIL'],False,None)
+item_labels['Route110_TrickHousePuzzle2_EventScript_ItemWaveMail'] = ('finditem',items['ITEM_WAVE_MAIL'],False,None)
+item_labels['Route110_TrickHousePuzzle3_EventScript_ItemShadowMail'] = ('finditem',items['ITEM_SHADOW_MAIL'],False,None)
+item_labels['Route110_TrickHousePuzzle3_EventScript_ItemWoodMail'] = ('finditem',items['ITEM_WOOD_MAIL'],False,None)
+item_labels['Route110_TrickHousePuzzle4_EventScript_ItemMechMail'] = ('finditem',items['ITEM_MECH_MAIL'],False,None)
+item_labels['Route110_TrickHousePuzzle6_EventScript_ItemGlitterMail'] = ('finditem',items['ITEM_GLITTER_MAIL'],False,None)
+item_labels['Route110_TrickHousePuzzle7_EventScript_ItemTropicMail'] = ('finditem',items['ITEM_TROPIC_MAIL'],False,None)
+item_labels['Route110_TrickHousePuzzle8_EventScript_ItemBeadMail'] = ('finditem',items['ITEM_BEAD_MAIL'],False,None)
+item_labels['VictoryRoad_1F_EventScript_ItemMaxElixir'] = ('finditem',items['ITEM_MAX_ELIXIR'],False,None)
+item_labels['VictoryRoad_1F_EventScript_ItemPPUp'] = ('finditem',items['ITEM_PP_UP'],False,None)
+item_labels['VictoryRoad_B1F_EventScript_ItemTM29'] = ('finditem',items['ITEM_TM29'],False,None)
+item_labels['VictoryRoad_B1F_EventScript_ItemFullRestore'] = ('finditem',items['ITEM_FULL_RESTORE'],False,None)
+item_labels['VictoryRoad_B2F_EventScript_ItemFullHeal'] = ('finditem',items['ITEM_FULL_HEAL'],False,None)
+item_labels['ArtisanCave_B1F_EventScript_ItemHPUp'] = ('finditem',items['ITEM_HP_UP'],False,None)
+item_labels['ArtisanCave_1F_EventScript_ItemCarbos'] = ('finditem',items['ITEM_CARBOS'],False,None)
+item_labels['MagmaHideout_1F_EventScript_ItemRareCandy'] = ('finditem',items['ITEM_RARE_CANDY'],False,None)
+item_labels['MagmaHideout_2F_2R_EventScript_MaxElixir'] = ('finditem',items['ITEM_MAX_ELIXIR'],False,None)
+item_labels['MagmaHideout_2F_2R_EventScript_ItemFullRestore'] = ('finditem',items['ITEM_FULL_RESTORE'],False,None)
+item_labels['MagmaHideout_3F_1R_EventScript_ItemNugget'] = ('finditem',items['ITEM_NUGGET'],False,None)
+item_labels['MagmaHideout_3F_2R_EventScript_ItemPPMax'] = ('finditem',items['ITEM_PP_MAX'],False,None)
+item_labels['MagmaHideout_4F_EventScript_MaxRevive'] = ('finditem',items['ITEM_MAX_REVIVE'],False,None)
+item_labels['MagmaHideout_3F_3R_EventScript_ItemEscapeRope'] = ('finditem',items['ITEM_ESCAPE_ROPE'],False,None)
+
+# Hidden items
+
+hidden_item_labels = {}
+
+hidden_item_labels['MtPyre_Summit_MapBGEvents'] = [
+		('bg_hidden_item_event',items['ITEM_ZINC'], False),
+		('bg_hidden_item_event',items['ITEM_RARE_CANDY'], False),
+		]
+
+hidden_item_labels['Route110_TrickHouseEnd_MapBGEvents'] = [
+		('bg_hidden_item_event',items['ITEM_NUGGET'], False),
+		]
+
+hidden_item_labels['Underwater_Route126_MapBGEvents'] = [
+		('bg_hidden_item_event',items['ITEM_HEART_SCALE'], False),
+		('bg_hidden_item_event',items['ITEM_ULTRA_BALL'], False),
+		('bg_hidden_item_event',items['ITEM_STARDUST'], False),
+		('bg_hidden_item_event',items['ITEM_PEARL'], False),
+		('bg_hidden_item_event',items['ITEM_IRON'], False),
+		('bg_hidden_item_event',items['ITEM_YELLOW_SHARD'], False),
+		('bg_hidden_item_event',items['ITEM_BIG_PEARL'], False),
+		('bg_hidden_item_event',items['ITEM_BLUE_SHARD'], False),
+		]
+
+hidden_item_labels['Underwater_Route127_MapBGEvents'] = [
+		('bg_hidden_item_event',items['ITEM_STAR_PIECE'], False),
+		('bg_hidden_item_event',items['ITEM_HP_UP'], False),
+		('bg_hidden_item_event',items['ITEM_HEART_SCALE'], False),
+		('bg_hidden_item_event',items['ITEM_RED_SHARD'], False),
+		]
+
+hidden_item_labels['Route117_MapBGEvents'] = [
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('bg_hidden_item_event',items['ITEM_REPEL'], False),
+		]
+
+hidden_item_labels['FallarborTown_MapBGEvents'] = [
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('bg_hidden_item_event',items['ITEM_NUGGET'], False),
+		]
+
+hidden_item_labels['Route105_MapBGEvents'] = [
+		('bg_hidden_item_event',items['ITEM_HEART_SCALE'], False),
+		('bg_hidden_item_event',items['ITEM_BIG_PEARL'], False),
+		]
+
+hidden_item_labels['Route109_MapBGEvents'] = [
+		('ignore',None, False),
+		('ignore',None, False),
+		('bg_hidden_item_event',items['ITEM_REVIVE'], False),
+		('bg_hidden_item_event',items['ITEM_HEART_SCALE'], False),
+		('bg_hidden_item_event',items['ITEM_GREAT_BALL'], False),
+		('bg_hidden_item_event',items['ITEM_ETHER'], False),
+		('bg_hidden_item_event',items['ITEM_HEART_SCALE'], False),
+		('bg_hidden_item_event',items['ITEM_HEART_SCALE'], False),
+		]
+
+hidden_item_labels['LavaridgeTown_MapBGEvents'] = [
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('bg_hidden_item_event',items['ITEM_ICE_HEAL'], False),
+		]
+
+hidden_item_labels['Route120_MapBGEvents'] = [
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('bg_hidden_item_event',items['ITEM_RARE_CANDY'], False),
+		('bg_hidden_item_event',items['ITEM_REVIVE'], False),
+		('bg_hidden_item_event',items['ITEM_RARE_CANDY'], False),
+		('bg_hidden_item_event',items['ITEM_ZINC'], False),
+		]
+
+hidden_item_labels['AbandonedShip_HiddenFloorRooms_MapBGEvents'] = [
+		('bg_hidden_item_event',items['ITEM_ROOM_1_KEY'], False),
+		('bg_hidden_item_event',items['ITEM_ROOM_2_KEY'], False),
+		('bg_hidden_item_event',items['ITEM_ROOM_4_KEY'], False),
+		('bg_hidden_item_event',items['ITEM_ROOM_6_KEY'], False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		]
+
+hidden_item_labels['Route111_MapBGEvents'] = [
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('bg_hidden_item_event',items['ITEM_STARDUST'], False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('bg_hidden_item_event',items['ITEM_PROTEIN'], False),
+		('bg_hidden_item_event',items['ITEM_RARE_CANDY'], False),
+		]
+
+hidden_item_labels['Route106_MapBGEvents'] = [
+		('bg_hidden_item_event',items['ITEM_POKE_BALL'], False),
+		('bg_hidden_item_event',items['ITEM_STARDUST'], False),
+		('bg_hidden_item_event',items['ITEM_HEART_SCALE'], False),
+		]
+
+hidden_item_labels['VictoryRoad_B2F_MapBGEvents'] = [
+		('bg_hidden_item_event',items['ITEM_ELIXIR'], False),
+		('bg_hidden_item_event',items['ITEM_MAX_REPEL'], False),
+		]
+
+hidden_item_labels['Underwater_Route124_MapBGEvents'] = [
+		('bg_hidden_item_event',items['ITEM_CARBOS'], False),
+		('bg_hidden_item_event',items['ITEM_GREEN_SHARD'], False),
+		('bg_hidden_item_event',items['ITEM_PEARL'], False),
+		('bg_hidden_item_event',items['ITEM_BIG_PEARL'], False),
+		('bg_hidden_item_event',items['ITEM_HEART_SCALE'], False),
+		('bg_hidden_item_event',items['ITEM_CALCIUM'], False),
+		('bg_hidden_item_event',items['ITEM_HEART_SCALE'], False),
+		]
+
+hidden_item_labels['Route104_MapBGEvents'] = [
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('bg_hidden_item_event',items['ITEM_SUPER_POTION'], False),
+		('bg_hidden_item_event',items['ITEM_POKE_BALL'], False),
+		('bg_hidden_item_event',items['ITEM_POTION'], False),
+		('bg_hidden_item_event',items['ITEM_ANTIDOTE'], False),
+		('bg_hidden_item_event',items['ITEM_HEART_SCALE'], False),
+		]
+
+hidden_item_labels['GraniteCave_B2F_MapBGEvents'] = [
+		('bg_hidden_item_event',items['ITEM_EVERSTONE'], False),
+		('bg_hidden_item_event',items['ITEM_EVERSTONE'], False),
+		]
+
+hidden_item_labels['PetalburgCity_MapBGEvents'] = [
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('bg_hidden_item_event',items['ITEM_RARE_CANDY'], False),
+		]
+
+hidden_item_labels['Route113_MapBGEvents'] = [
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('bg_hidden_item_event',items['ITEM_ETHER'], False),
+		('bg_hidden_item_event',items['ITEM_TM32'], True),
+		('bg_hidden_item_event',items['ITEM_NUGGET'], False),
+		]
+
+hidden_item_labels['Route128_MapBGEvents'] = [
+		('bg_hidden_item_event',items['ITEM_HEART_SCALE'], False),
+		('bg_hidden_item_event',items['ITEM_HEART_SCALE'], False),
+		('bg_hidden_item_event',items['ITEM_HEART_SCALE'], False),
+		]
+
+hidden_item_labels['Route114_MapBGEvents'] = [
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('bg_hidden_item_event',items['ITEM_CARBOS'], False),
+		('ignore',None, False),
+		('bg_hidden_item_event',items['ITEM_REVIVE'], False),
+		]
+
+hidden_item_labels['Route115_MapBGEvents'] = [
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('bg_hidden_item_event',items['ITEM_HEART_SCALE'], False),
+		]
+
+hidden_item_labels['LilycoveCity_MapBGEvents'] = [
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('bg_hidden_item_event',items['ITEM_HEART_SCALE'], False),
+		('bg_hidden_item_event',items['ITEM_PP_UP'], False),
+		('bg_hidden_item_event',items['ITEM_POKE_BALL'], False),
+		]
+
+hidden_item_labels['JaggedPass_MapBGEvents'] = [
+		('bg_hidden_item_event',items['ITEM_FULL_HEAL'], False),
+		('bg_hidden_item_event',items['ITEM_GREAT_BALL'], False),
+		]
+
+hidden_item_labels['Route110_MapBGEvents'] = [
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('bg_hidden_item_event',items['ITEM_REVIVE'], False),
+		('bg_hidden_item_event',items['ITEM_GREAT_BALL'], False),
+		('bg_hidden_item_event',items['ITEM_POKE_BALL'], False),
+		('bg_hidden_item_event',items['ITEM_FULL_HEAL'], False),
+		]
+
+hidden_item_labels['Route116_MapBGEvents'] = [
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('bg_hidden_item_event',items['ITEM_SUPER_POTION'], False),
+		('bg_hidden_item_event',items['ITEM_BLACK_GLASSES'], False),
+		]
+
+hidden_item_labels['VictoryRoad_1F_MapBGEvents'] = [
+		('bg_hidden_item_event',items['ITEM_ULTRA_BALL'], False),
+		]
+
+hidden_item_labels['SafariZone_Northeast_MapBGEvents'] = [
+		('bg_hidden_item_event',items['ITEM_RARE_CANDY'], False),
+		('bg_hidden_item_event',items['ITEM_ZINC'], False),
+		]
+
+hidden_item_labels['Route121_MapBGEvents'] = [
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('bg_hidden_item_event',items['ITEM_HP_UP'], False),
+		('bg_hidden_item_event',items['ITEM_NUGGET'], False),
+		('bg_hidden_item_event',items['ITEM_FULL_HEAL'], False),
+		('bg_hidden_item_event',items['ITEM_MAX_REVIVE'], False),
+		]
+
+hidden_item_labels['Route123_MapBGEvents'] = [
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('bg_hidden_item_event',items['ITEM_SUPER_REPEL'], False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('bg_hidden_item_event',items['ITEM_REVIVE'], False),
+		('bg_hidden_item_event',items['ITEM_HYPER_POTION'], False),
+		('bg_hidden_item_event',items['ITEM_PP_UP'], False),
+		('bg_hidden_item_event',items['ITEM_RARE_CANDY'], False),
+		]
+
+hidden_item_labels['Route108_MapBGEvents'] = [
+		('bg_hidden_item_event',items['ITEM_RARE_CANDY'], False),
+		]
+
+hidden_item_labels['SafariZone_Southeast_MapBGEvents'] = [
+		('bg_hidden_item_event',items['ITEM_PP_UP'], False),
+		('bg_hidden_item_event',items['ITEM_FULL_RESTORE'], False),
+		]
+
+hidden_item_labels['ArtisanCave_B1F_MapBGEvents'] = [
+		('bg_hidden_item_event',items['ITEM_ZINC'], False),
+		('bg_hidden_item_event',items['ITEM_CALCIUM'], False),
+		('bg_hidden_item_event',items['ITEM_PROTEIN'], False),
+		('bg_hidden_item_event',items['ITEM_IRON'], False),
+		]
+
+hidden_item_labels['PetalburgWoods_MapBGEvents'] = [
+		('ignore',None, False),
+		('bg_hidden_item_event',items['ITEM_POTION'], False),
+		('bg_hidden_item_event',items['ITEM_TINY_MUSHROOM'], False),
+		('bg_hidden_item_event',items['ITEM_TINY_MUSHROOM'], False),
+		('bg_hidden_item_event',items['ITEM_POKE_BALL'], False),
+		]
+
+hidden_item_labels['NavelRock_Top_MapBGEvents'] = [
+		('bg_hidden_item_event',items['ITEM_SACRED_ASH'], False),
+		]
+
+hidden_item_labels['MtPyre_Exterior_MapBGEvents'] = [
+		('bg_hidden_item_event',items['ITEM_ULTRA_BALL'], False),
+		('bg_hidden_item_event',items['ITEM_MAX_ETHER'], False),
+		]
+
+hidden_item_labels['Route118_MapBGEvents'] = [
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('bg_hidden_item_event',items['ITEM_IRON'], False),
+		('bg_hidden_item_event',items['ITEM_HEART_SCALE'], False),
+		]
+
+hidden_item_labels['Underwater_Route128_MapBGEvents'] = [
+		('bg_hidden_item_event',items['ITEM_PROTEIN'], False),
+		('bg_hidden_item_event',items['ITEM_PEARL'], False),
+		]
+
+hidden_item_labels['Route119_MapBGEvents'] = [
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('bg_hidden_item_event',items['ITEM_CALCIUM'], False),
+		('bg_hidden_item_event',items['ITEM_ULTRA_BALL'], False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('ignore',None, False),
+		('bg_hidden_item_event',items['ITEM_FULL_HEAL'], False),
+		('bg_hidden_item_event',items['ITEM_MAX_ETHER'], False),
+		]
+
+hidden_item_labels['SSTidalLowerDeck_MapBGEvents'] = [
+		('bg_hidden_item_event',items['ITEM_LEFTOVERS'], False),
+		]
+
+pickle.dump((mon_labels,trade_labels,foe_item_labels,foe_labels,item_labels,hidden_item_labels,item_id),args.output)
 args.output.close()
