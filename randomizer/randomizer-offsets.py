@@ -22,7 +22,7 @@ hidden_item_addresses = set()
 
 # Mons Format: (Address, Catch Em All, exclusive ID)
 mons = []
-# Items Format: (Address, is_tm, exclusive ID associated)
+# Items Format: (Address, type, exclusive ID associated)
 items = []
 
 
@@ -150,13 +150,13 @@ def process_mon(address,data,label):
 								item_bin = args.binary.read(2)
 								item_read = int.from_bytes(item_bin, byteorder='little', signed=False)
 								if item_read == item:
-									items.append((start + 4,False,eid))
+									items.append((start + 4,'gift',eid))
 									entry = (start + 1, False, eid)
 									address = start + 6
 								else:
 									mismatch_item = item_read
 							else:
-								items.append((start + 4,False,eid))
+								items.append((start + 4,'gift',eid))
 								entry = (start + 1, False, eid)
 								address = start + 6
 						else:
@@ -238,13 +238,13 @@ def process_mon(address,data,label):
 								item_bin = args.binary.read(2)
 								item_read = int.from_bytes(item_bin, byteorder='little', signed=False)
 								if item_read == item:
-									items.append((start + 4,False,eid))
+									items.append((start + 4,'gift',eid))
 									entry = (start + 1, False, eid)
 									address = start + 6
 								else:
 									mismatch_item = item_read
 							else:
-								items.append((start + 4,False,eid))
+								items.append((start + 4,'gift',eid))
 								entry = (start + 1, False, eid)
 								address = start + 6
 						else:
@@ -325,7 +325,7 @@ def process_trade(address,data,label):
 		if hitem_i != item:
 			print('WARN in-game-trade held item mismatch %d != %d %s'%(item,hitem_i,label))
 		else:
-			items.append((address + 0x28,False,id_counter))
+			items.append((address + 0x28,'gift',id_counter))
 		tradereq_i = int.from_bytes(tradereq, byteorder='little', signed=False)
 		if tradereq_i != requested:
 			print('WARN in-game-trade request mismatch %d != %d %s'%(requested,tradereq_i,label))
@@ -357,7 +357,7 @@ def process_foe_item(address,data,label):
 		if hitem_i != item:
 			print('WARN foe item item mismatch %d != %d %s'%(item,hitem_i,label))
 		else:
-			items.append((address + 0x28,False,id_counter))
+			items.append((address + 0x28,'held',id_counter))
 		address += 8
 		id_counter += 1
 
@@ -385,7 +385,7 @@ def process_item(address,data,label):
 	global mons
 	global items
 	global id_counter
-	(entry_type,item,is_tm,eid) = data
+	(entry_type,item,item_type,eid) = data
 	if entry_type == 'pc':
 		args.binary.seek(address)
 		item_bin = args.binary.read(2)
@@ -393,7 +393,7 @@ def process_item(address,data,label):
 		if item_read != item:
 			print('WARN pc item mismatch %d != %d %s'%(item_read,item,label))
 		else:
-			items.append((address,is_tm,eid))
+			items.append((address,item_type,eid))
 	elif entry_type == 'giveitem' or entry_type == 'finditem':
 		# giveitem and finditem are actually a couple of setorcopyvars and calls to functions
 		# 0x1a 0xVADD 0xITEM
@@ -409,7 +409,7 @@ def process_item(address,data,label):
 				item_bin = args.binary.read(2)
 				item_read = int.from_bytes(item_bin, byteorder='little', signed=False)
 				if item == item_read:
-					entry = (start + 3,is_tm,eid)
+					entry = (start + 3,item_type,eid)
 				else:
 					mismatch = item_read
 			start += 1
@@ -432,7 +432,7 @@ def process_hidden_item(address,data,label):
 	global items
 	global id_counter
 	for entry in data:
-		(entry_type,item,is_tm) = entry
+		(entry_type,item,item_type) = entry
 		if entry_type == 'ignore':
 			address += STRUCT_SIZE
 		elif entry_type == 'bg_hidden_item_event':
@@ -449,7 +449,7 @@ def process_hidden_item(address,data,label):
 			# total size: 14			e
 			item_read = int.from_bytes(item_bin, byteorder='little', signed=False)
 			if item == item_read:
-				items.append((address + 8,is_tm,None))
+				items.append((address + 8,item_type,None))
 			else:
 				print('WARN hidden item mismatch %d != %d %s'%(item,item_read,label))
 			address += STRUCT_SIZE
@@ -520,27 +520,27 @@ for line in lines:
 		except ValueError:
 			pass
 
-missing_mons = mon_addresses.difference(set(mon_labels.keys()))
+missing_mons = set(mon_labels.keys()).difference(mon_addresses)
 for label in missing_mons:
 	print('WARN missing mon label %s'%label)
 
-missing_trades = trade_addresses.difference(set(trade_labels.keys()))
+missing_trades = set(trade_labels.keys()).difference(trade_addresses)
 for label in missing_trades:
 	print('WARN missing trade label %s'%label)
 
-missing_foe_item = foe_item_addresses.difference(set(foe_item_labels.keys()))
+missing_foe_item = set(foe_item_labels.keys()).difference(foe_item_addresses)
 for label in missing_foe_item:
 	print('WARN missing foe item label %s'%label)
 
-missing_foe= foe_addresses.difference(set(foe_labels.keys()))
+missing_foe= set(foe_labels.keys()).difference(foe_addresses)
 for label in missing_foe:
 	print('WARN missing foe label %s'%label)
 
-missing_item = item_addresses.difference(set(item_labels.keys()))
+missing_item = set(item_labels.keys()).difference(item_addresses)
 for label in missing_item:
 	print('WARN missing item label %s'%label)
 
-missing_hidden_item = hidden_item_addresses.difference(set(hidden_item_labels.keys()))
+missing_hidden_item = set(hidden_item_labels.keys()).difference(hidden_item_addresses)
 for label in missing_hidden_item:
 	print('WARN missing hidden item label %s'%label)
 
