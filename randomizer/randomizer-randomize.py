@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import argparse
+import hashlib
 import pickle
 import random
 import shutil
@@ -1638,7 +1639,10 @@ else:
 	try:
 		value = int(args.seed)
 	except ValueError:
-		value = hash(args.seed)
+		h = hashlib.md5()
+		h.update(args.seed.encode('utf-8'))
+		pre_value = h.digest()
+		value = int.from_bytes(pre_value,byteorder='big',signed=True)
 	seed = random.seed(value,version=2)
 	print('INFO Seed is <%d> (%s)'%(value,args.seed))
 
