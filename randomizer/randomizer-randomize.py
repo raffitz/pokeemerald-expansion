@@ -4,6 +4,7 @@ import argparse
 import pickle
 import random
 import shutil
+import time
 
 parser = argparse.ArgumentParser(description='Build label list')
 parser.add_argument('reference',type=argparse.FileType('rb'),help='The species and items reference')
@@ -1629,11 +1630,17 @@ items_tm = [
 		]
 
 if args.seed is None:
-	print('INFO Seed is system time')
-	random.seed(None,version=2)
+	value = int(time.time())
+	seed = random.seed(value,version=2)
+	print('INFO Seed is system time <%d>'%value)
 else:
-	print('INFO Seed is %s'%args.seed)
-	random.seed(args.seed,version=2)
+	value = None
+	try:
+		value = int(args.seed)
+	except ValueError:
+		value = hash(args.seed)
+	seed = random.seed(value,version=2)
+	print('INFO Seed is <%d> (%s)'%(value,args.seed))
 
 mon_cea = mon_options.copy()
 random.shuffle(mon_cea)
