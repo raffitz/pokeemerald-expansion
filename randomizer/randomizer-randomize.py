@@ -1509,7 +1509,10 @@ else:
 	print('INFO Seed is <%d> (%s)'%(value,args.seed))
 
 mon_cea = mon_options.copy()
+
 random.shuffle(mon_cea)
+random.shuffle(pkmn_offsets)
+random.shuffle(item_offsets)
 
 def get_mon_cea():
 	global mon_cea
